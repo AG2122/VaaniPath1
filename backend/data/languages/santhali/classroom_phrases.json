@@ -1,0 +1,162 @@
+[
+  {
+    "hindi": "अपनी किताब खोलो",
+    "santhali": "ᱠᱚᱨᱚᱜ ᱠᱤᱛᱟᱜ ᱫᱩᱴᱷᱤᱣᱮ ᱢᱮ",
+    "english": "Open your book",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/open_book.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "ध्यान से सुनो",
+    "santhali": "ᱱᱤᱨᱚᱜ ᱥᱟᱛᱟᱨᱚᱜ ᱥᱩᱱᱮ ᱢᱮ",
+    "english": "Listen carefully",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/listen_carefully.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "मेरे बाद दोहराओ",
+    "santhali": "ᱤᱦᱟ ᱨᱚᱨᱟ ᱢᱩᱱᱚᱨᱚᱜ ᱢᱮ",
+    "english": "Repeat after me",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/repeat_after_me.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "जोड़ी में काम करो",
+    "santhali": "ᱰᱩᱱᱚᱜ ᱡᱚᱨᱚᱜ ᱠᱟᱨᱚᱭ ᱢᱮ",
+    "english": "Work in pairs",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/work_pairs.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "कौन जवाब जानता है?",
+    "santhali": "ᱠᱩᱱᱚ ᱟᱛᱟᱨᱚᱜ ᱫᱩᱴᱷᱤᱣᱮ ᱠᱚᱱᱚᱜ?",
+    "english": "Who knows the answer?",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/who_knows.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "बहुत अच्छा!",
+    "santhali": "ᱜᱚᱨᱚ ᱥᱟᱢᱚᱜ!",
+    "english": "Great job!",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/great_job.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "चलो शुरू करते हैं",
+    "santhali": "ᱫᱟᱨᱤ ᱛᱩᱜᱚ ᱵᱟᱝᱨᱚᱢ ᱢᱮ",
+    "english": "Let's begin",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/lets_begin.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "जवाब लिखो",
+    "santhali": "ᱟᱛᱟᱨᱚᱜ ᱚᱞᱚᱨᱮ ᱢᱮ",
+    "english": "Write the answer",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/write_answer.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "खड़े हो जाओ",
+    "santhali": "ᱩᱹᱜᱚᱨᱚᱜ ᱢᱮ",
+    "english": "Stand up",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/stand_up.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "बैठ जाओ",
+    "santhali": "ᱥᱟᱲᱟᱨᱚᱜ ᱢᱮ",
+    "english": "Sit down",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/sit_down.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "बोर्ड देखो",
+    "santhali": "ᱵᱚᱨᱰ ᱞᱟᱛᱮᱨᱚᱜ ᱢᱮ",
+    "english": "Look at the board",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/look_board.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "इसे पढ़ो",
+    "santhali": "ᱛᱟᱢᱮᱨᱚᱜ ᱢᱮ",
+    "english": "Read this",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/read_this.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "फिर से कोशिश करो",
+    "santhali": "ᱨᱚᱨᱚᱜ ᱠᱚᱨᱚᱜ ᱢᱟᱨᱮᱡᱟᱨᱚᱜ ᱢᱮ",
+    "english": "Try again",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/try_again.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "शाबाश!",
+    "santhali": "ᱰᱟᱨᱟ᱃!",
+    "english": "Well done!",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/well_done.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "प्यारे बच्चों",
+    "santhali": "ᱡᱟᱨᱤᱚᱜ ᱡᱟᱨᱤᱚᱜ",
+    "english": "Dear students",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/dear_students.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "आज का पाठ",
+    "santhali": "ᱮᱢᱟᱡᱮ ᱠᱚᱨᱚᱜ ᱯᱟᱛᱚ",
+    "english": "Today's lesson",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/todays_lesson.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "होमवर्क करो",
+    "santhali": "ᱜᱚᱨᱚᱜ ᱠᱚᱨᱚᱜ ᱮᱥᱚ ᱵᱟᱝᱨᱚᱢ ᱢᱮ",
+    "english": "Do your homework",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/homework.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "परीक्षा शुरू हो रही है",
+    "santhali": "ᱱᱩᱯᱚᱨᱚ ᱛᱩᱜᱚ ᱵᱟᱝᱨᱚᱨᱚᱜ ᱡᱟᱨᱚᱜ",
+    "english": "The exam is starting",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/exam_starting.wav",
+    "confidence": 0.95
+  },
+  {
+    "hindi": "समय हो गया",
+    "santhali": "ᱥᱟᱢᱟᱭ ᱵᱟᱱᱚᱜ ᱢᱟᱨᱚᱜ",
+    "english": "Time is up",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/time_up.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "धन्यवाद",
+    "santhali": "ᱰᱟᱨᱟ᱃",
+    "english": "Thank you",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/thank_you.wav",
+    "confidence": 0.99
+  }
+]

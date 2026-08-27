@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+*.egg
+.pytest_cache/
+.mypy_cache/
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+
+# Database
+*.db
+*.sqlite3
+vanipath.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Freebuff
+.freebuff/
+
+# Audio cache
+backend/data/audio/*.wav
+backend/data/audio/*.mp3
+backend/data/audio/*.ogg

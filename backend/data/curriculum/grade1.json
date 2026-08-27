@@ -1,0 +1,62 @@
+{
+  "grade": 1,
+  "language": "sat",
+  "subjects": {
+    "Mathematics": {
+      "topics": [
+        {
+          "name": "Counting 1-10",
+          "learning_outcome": "Students can count objects up to 10 and match numerals to quantities.",
+          "content": {
+            "hindi": "आज हम 1 से 10 तक गिनती सीखेंगे। हम पेड़, फल और पशुओं को गिनेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ 1 ᱠᱚᱨᱟ 10 ᱦᱟᱨᱮ ᱜᱤᱱᱚᱨᱮ ᱵᱟᱝᱨᱚᱢ ᱢᱮ। ᱢᱟᱝᱣᱟ, ᱢᱟᱝᱣᱟ ᱟᱨ ᱥᱟᱲᱮ ᱜᱤᱱᱚᱨᱮ ᱢᱮ।"
+          },
+          "vocabulary": {
+            "gana": "ᱜᱤᱱᱚᱨᱮ",
+            "ek": "ᱤᱧ",
+            "du": "ᱰᱩ",
+            "tina": "ᱛᱤᱱᱟ",
+            "charoi": "ᱪᱟᱨᱮᱭ",
+            "dutte": "ᱰᱩᱛᱤ"
+          }
+        },
+        {
+          "name": "Numbers 1-5",
+          "learning_outcome": "Students can recognize and write numbers 1-5.",
+          "content": {
+            "hindi": "हम संख्या 1, 2, 3, 4, 5 पहचानेंगे और लिखेंगे।",
+            "santhali": "ᱫᱟᱨᱤ ᱥᱟᱱᱛᱟᱲᱤ 1, 2, 3, 4, 5 ᱫᱩᱴᱷᱤᱣᱮ ᱟᱨ ᱚᱞᱚᱨᱮ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Shapes",
+          "learning_outcome": "Students can identify basic shapes.",
+          "content": {
+            "hindi": "आज हम गोल, वर्ग और त्रिकोण सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱜᱩᱨᱳ, ᱫᱩᱠᱟ ᱟᱨ ᱛᱤᱨᱤᱠᱚᱱᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        }
+      ]
+    },
+    "Language": {
+      "topics": [
+        {
+          "name": "Hindi Letters",
+          "learning_outcome": "Students can recognize basic Hindi letters.",
+          "content": {
+            "hindi": "आज हम हिंदी के अक्षर सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱦᱤᱱᱛᱤ ᱠᱚᱨᱚᱜ ᱚᱞᱚᱨᱮ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Simple Words",
+          "learning_outcome": "Students can read and write simple Hindi words.",
+          "content": {
+            "hindi": "आज हम सरल शब्द सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱥᱟᱨᱤᱟᱜ ᱝᱚᱞᱚᱨ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        }
+      ]
+    }
+  }
+}

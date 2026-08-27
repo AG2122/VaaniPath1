@@ -1,0 +1,90 @@
+{
+  "grade": 2,
+  "language": "sat",
+  "subjects": {
+    "Mathematics": {
+      "topics": [
+        {
+          "name": "Numbers 1-20",
+          "learning_outcome": "Students can identify, count, and write numbers 1-20.",
+          "content": {
+            "hindi": "आज हम संख्याओं 1 से 20 तक सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱥᱟᱱᱛᱟᱲᱤ 1 ᱠᱚᱨᱟ 20 ᱦᱟᱨᱮ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Addition",
+          "learning_outcome": "Students can perform simple addition within 20.",
+          "content": {
+            "hindi": "आज हम जोड़ना सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱡᱚᱨᱚᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Subtraction",
+          "learning_outcome": "Students can perform simple subtraction within 20.",
+          "content": {
+            "hindi": "आज हम घटाना सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱜᱩᱴᱟᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Counting",
+          "learning_outcome": "Students can count objects accurately.",
+          "content": {
+            "hindi": "आज हम वस्तुओं की गिनती करेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱵᱤᱥᱩᱨᱤ ᱜᱤᱱᱚᱨᱮ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Shapes",
+          "learning_outcome": "Students can identify and name basic shapes.",
+          "content": {
+            "hindi": "आज हम आकार सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱵᱤᱥᱩᱨᱤ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        }
+      ]
+    },
+    "Language": {
+      "topics": [
+        {
+          "name": "Letters",
+          "learning_outcome": "Students can recognize Devanagari and Ol Chiki letters.",
+          "content": {
+            "hindi": "आज हम अक्षर सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱚᱞᱚᱨᱮ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Reading",
+          "learning_outcome": "Students can read simple sentences.",
+          "content": {
+            "hindi": "आज हम पढ़ना सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱛᱟᱢᱮᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        },
+        {
+          "name": "Writing",
+          "learning_outcome": "Students can write simple sentences.",
+          "content": {
+            "hindi": "आज हम लिखना सीखेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱚᱞᱚᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।"
+          }
+        }
+      ]
+    },
+    "Reading": {
+      "topics": [
+        {
+          "name": "Story Reading",
+          "learning_outcome": "Students can read and understand simple stories.",
+          "content": {
+            "hindi": "आज हम एक कहानी पढ़ेंगे।",
+            "santhali": "ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱤᱧ ᱝᱚᱞᱚᱨ ᱛᱟᱢᱮᱨᱚᱜ ᱢᱮ।"
+          }
+        }
+      ]
+    }
+  }
+}

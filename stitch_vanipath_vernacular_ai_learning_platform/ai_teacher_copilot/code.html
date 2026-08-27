@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VaniPath - AI Teacher Copilot</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Lexend:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#fffbff",
+                      "error": "#ba1a1a",
+                      "outline": "#737686",
+                      "surface-container-high": "#e7e7f3",
+                      "surface-tint": "#0053db",
+                      "on-surface-variant": "#434655",
+                      "surface-container-low": "#f3f3fe",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-tertiary-fixed-variant": "#005137",
+                      "on-background": "#191b23",
+                      "tertiary-fixed-dim": "#68dba9",
+                      "primary": "#004ac6",
+                      "surface-container-highest": "#e1e2ed",
+                      "inverse-surface": "#2e3039",
+                      "primary-container": "#2563eb",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#002114",
+                      "on-tertiary-container": "#bdffdc",
+                      "surface-container": "#ededf9",
+                      "on-primary-fixed": "#00174b",
+                      "surface": "#faf8ff",
+                      "surface-dim": "#d9d9e5",
+                      "outline-variant": "#c3c6d7",
+                      "tertiary": "#006243",
+                      "secondary-fixed": "#eaddff",
+                      "primary-fixed": "#dbe1ff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#85f8c4",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f0f0fb",
+                      "inverse-primary": "#b4c5ff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "secondary": "#712ae2",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-primary-container": "#eeefff",
+                      "surface-bright": "#faf8ff",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#8a4cfc",
+                      "on-surface": "#191b23",
+                      "tertiary-container": "#007d57",
+                      "on-secondary-fixed": "#25005a",
+                      "surface-variant": "#e1e2ed",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "background": "#faf8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "base": "4px",
+                      "xs": "8px",
+                      "xl": "64px",
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "sm": "16px",
+                      "lg": "40px",
+                      "margin-desktop": "32px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Lexend"
+                      ],
+                      "display-lg": [
+                              "Lexend"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Lexend"
+                      ],
+                      "headline-md": [
+                              "Lexend"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .ai-gradient {
+            background: linear-gradient(135deg, #712ae2 0%, #8a4cfc 100%);
+        }
+        .ai-glow:hover {
+            box-shadow: 0 0 15px rgba(138, 76, 252, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col pb-20 md:pb-0 pt-12 md:pt-16">
+<!-- TopAppBar Mobile -->
+<header class="md:hidden fixed top-0 w-full z-50 bg-surface shadow-sm h-12 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full object-cover" data-alt="A small, professional user profile photo showing a smiling teacher in a softly lit, modern educational setting. Light, clean background to match a modern interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzYriUsBfKWimdE9IZ42JBEfGHOE_fMeiAA_DOQgc6yv0TYkZOm_1-0qSSKHy_wfIOzlza1nKgRBwajRXj4-1bu2pOT217JUQKoEryCAgFIRo7kJtaIImEDCBO1fokOkwHV19EAA3pIvMrzKxd9QyEfBDl_G9kyb1xZm-vdqq5SikHLt1kdD1Ez3lMY3yIUsf8MzQqBrvqLWQcwmTxEspiIP2rSDzsxTPfvP1ZckLqdkN9uL8EhMCYUg"/>
+</div>
+<div class="font-headline-md text-headline-md font-bold text-primary text-center w-full">VaniPath</div>
+<div class="flex items-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+</div>
+</header>
+<!-- Desktop Nav (Hidden on Mobile) -->
+<header class="hidden md:flex fixed top-0 w-full z-50 bg-surface shadow-sm h-16 justify-between items-center px-margin-desktop">
+<div class="font-headline-lg text-headline-lg font-bold text-primary">VaniPath</div>
+<nav class="flex gap-8">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">translate</span>Translate</a>
+<a class="text-primary font-bold font-label-md text-label-md flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>Classroom</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">menu_book</span>Learning</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">person</span>Profile</a>
+</nav>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A professional user profile photo showing a smiling teacher in a softly lit, modern educational setting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJyCiT7Csft1mJF-8BhigvwwY70MNXhyZedPuUDkqQAN-_pJQuYJGqGcKtqskkEfoQCNUdh1wziYNdN8prm7N-aYQ9ID7qMiEB-UUbvfGrzBIuiVNAJ2bbC5UwcTF0DDDEghow30N2-4Ag0SMrXcuX2zlezg_lx5XH06ml-eMPIb4Ag22J8oQcj7FaZrQj6OA8o0lWSCJvFC513PVjESR09X49i2GevrfE9vJnkyA0TbOptFcCZkaSSg"/>
+</div>
+</header>
+<main class="flex-grow w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-md">
+<!-- Header Section -->
+<div class="mb-lg flex items-center justify-between">
+<div>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">arrow_back_ios_new</span>
+                    AI Teacher Copilot
+                </h1>
+<p class="text-on-surface-variant font-body-md text-body-md">Generate culturally relevant lesson plans instantly.</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter md:gap-md">
+<!-- Left Column: Setup Form -->
+<div class="lg:col-span-4 space-y-md">
+<div class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)]">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Lesson Setup</h2>
+<div class="space-y-sm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Subject</label>
+<input class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" readonly="" type="text" value="Maths"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Topic</label>
+<input class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" readonly="" type="text" value="Numbers 1-20"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Target Language</label>
+<div class="relative">
+<select class="w-full h-12 rounded-xl border border-outline-variant px-4 appearance-none font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors bg-surface-container-lowest">
+<option>Ho</option>
+<option>Santhali</option>
+<option>Munda</option>
+</select>
+<span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<button class="w-full h-12 rounded-full ai-gradient text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 mt-md ai-glow transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">autorenew</span>
+                            Regenerate Lesson
+                        </button>
+</div>
+</div>
+</div>
+<!-- Right Column: AI Content -->
+<div class="lg:col-span-8 space-y-md">
+<div class="bg-surface-container-lowest rounded-2xl p-md border border-secondary/20 shadow-[0_8px_16px_rgba(0,0,0,0.08)] relative overflow-hidden">
+<!-- Subtle AI Background Pattern -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-secondary/5 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+<div class="flex items-center justify-between mb-md">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                            Generated Lesson Plan
+                        </h2>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full font-label-md text-label-md text-xs">Ready</span>
+</div>
+<div class="space-y-md">
+<!-- Step 1: Explain -->
+<div class="border-l-2 border-secondary pl-sm">
+<h3 class="font-label-md text-label-md text-secondary uppercase tracking-wider mb-2">1. Explain</h3>
+<p class="font-body-md text-body-md text-on-surface mb-2">Introduce numbers 1-20 using visual counting beads commonly found in the community.</p>
+<div class="bg-surface-container rounded-lg p-sm border border-outline-variant/50">
+<p class="font-headline-md text-headline-md font-bold text-on-surface mb-1">Miya, Barya, Apiya...</p>
+<p class="font-body-md text-body-md text-on-surface-variant">One, Two, Three... (Ho language basics)</p>
+</div>
+</div>
+<!-- Step 2: Demonstrate -->
+<div class="border-l-2 border-primary pl-sm">
+<h3 class="font-label-md text-label-md text-primary uppercase tracking-wider mb-2">2. Demonstrate</h3>
+<p class="font-body-md text-body-md text-on-surface mb-2">Count local objects out loud. Ask students to bring small stones or use mangoes to physically group items into sets of 5.</p>
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-outline">eco</span>
+<span class="material-symbols-outlined text-outline">eco</span>
+<span class="material-symbols-outlined text-outline">eco</span>
+</div>
+</div>
+<!-- Step 3: Practice -->
+<div class="border-l-2 border-tertiary pl-sm">
+<h3 class="font-label-md text-label-md text-tertiary uppercase tracking-wider mb-2">3. Practice</h3>
+<p class="font-body-md text-body-md text-on-surface mb-2">Bilingual verbal repetition. Call out a number in the state language, students respond in Ho while showing the correct number of fingers or stones.</p>
+<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline mt-2">
+<span class="material-symbols-outlined text-sm">volume_up</span> Play Pronunciation Guide
+                            </button>
+</div>
+</div>
+</div>
+<!-- Action Buttons -->
+<div class="flex flex-col sm:flex-row gap-sm justify-end pt-sm">
+<button class="h-12 px-6 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">translate</span>
+                        Translate Worksheet
+                    </button>
+<button class="h-12 px-6 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">bookmark_border</span>
+                        Save Lesson Plan
+                    </button>
+<button class="h-12 px-6 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+                        Use in Classroom
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Mobile -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface-container border-t border-outline-variant shadow-lg flex justify-around items-center px-4 py-2 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md text-xs mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<span class="material-symbols-outlined">translate</span>
+<span class="font-label-md text-label-md text-xs mt-1">Translate</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 ease-in-out w-20 h-14" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="font-label-md text-label-md text-xs mt-1">Classroom</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<span class="material-symbols-outlined">menu_book</span>
+<span class="font-label-md text-label-md text-xs mt-1">Learning</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md text-xs mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

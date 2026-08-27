@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VaniPath - Student Progress Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Lexend:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "on-secondary-container": "#fffbff",
+                        "error": "#ba1a1a",
+                        "outline": "#737686",
+                        "surface-container-high": "#e7e7f3",
+                        "surface-tint": "#0053db",
+                        "on-surface-variant": "#434655",
+                        "surface-container-low": "#f3f3fe",
+                        "on-secondary-fixed-variant": "#5a00c6",
+                        "on-tertiary-fixed-variant": "#005137",
+                        "on-background": "#191b23",
+                        "tertiary-fixed-dim": "#68dba9",
+                        "primary": "#004ac6",
+                        "surface-container-highest": "#e1e2ed",
+                        "inverse-surface": "#2e3039",
+                        "primary-container": "#2563eb",
+                        "on-tertiary": "#ffffff",
+                        "on-tertiary-fixed": "#002114",
+                        "on-tertiary-container": "#bdffdc",
+                        "surface-container": "#ededf9",
+                        "on-primary-fixed": "#00174b",
+                        "surface": "#faf8ff",
+                        "surface-dim": "#d9d9e5",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary": "#006243",
+                        "secondary-fixed": "#eaddff",
+                        "primary-fixed": "#dbe1ff",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#85f8c4",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "inverse-primary": "#b4c5ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary": "#712ae2",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-primary-container": "#eeefff",
+                        "surface-bright": "#faf8ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#8a4cfc",
+                        "on-surface": "#191b23",
+                        "tertiary-container": "#007d57",
+                        "on-secondary-fixed": "#25005a",
+                        "surface-variant": "#e1e2ed",
+                        "secondary-fixed-dim": "#d2bbff",
+                        "background": "#faf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "xl": "64px",
+                        "gutter": "16px",
+                        "margin-mobile": "16px",
+                        "sm": "16px",
+                        "lg": "40px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg-mobile": ["Lexend"],
+                        "display-lg": ["Lexend"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Lexend"],
+                        "headline-md": ["Lexend"],
+                        "body-lg": ["Inter"],
+                        "caption": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "caption": ["12px", {"lineHeight": "16px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .progress-circle {
+            transition: stroke-dashoffset 1s ease-in-out;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md antialiased pb-[80px] md:pb-0">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile h-12 bg-surface dark:bg-background shadow-sm docked full-width top-0 sticky z-40">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-primary-container flex items-center justify-center">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A brightly lit, cheerful portrait of a young Indian boy named Arjun, smiling enthusiastically. The background is softly out of focus, suggesting a modern, sunny classroom environment. The lighting is soft and flattering, highlighting his joyful expression. The overall mood is positive and encouraging, fitting for an educational platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXecgU1P6FCDpSB7evtsXBv9uLXQM7pVvnw8939HmVKXVucMfjSZLVKPrPfPGLRsGEz6kza-SKoRSJuIFmyyRAUK7Y18WqEGgiVUHLZ5y_8mQdOBcp1WVUK7Swo8vErZbA2xJnheDDwdZrCPOwYjOcKF2cnWwPGwdg1UnqDz4yejvAqpRAoB1kIrbyTN9B8PKcq54mWIF11uLyBeBFmak0uYnefgSBtRBjEy1X9mlWADjfjrFuUYA5jg"/>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">VaniPath</span>
+</div>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-primary dark:text-primary-fixed hover:bg-surface-container-low transition-colors scale-95 active:duration-100">
+<span class="material-symbols-outlined" data-icon="cloud_done">cloud_done</span>
+</button>
+</header>
+<main class="max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop py-lg">
+<!-- Welcome & Streak -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg">
+<div>
+<h1 class="font-display-lg text-display-lg text-on-surface">Hi, Arjun! 👋</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Ready for another fun day of learning?</p>
+</div>
+<div class="bg-surface-container-low rounded-2xl p-sm flex items-center gap-sm shadow-sm border border-outline-variant/30">
+<div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]" data-icon="local_fire_department" data-weight="fill" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Learning Streak</p>
+<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">5 Days <span class="text-error">🔥</span></p>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-md">
+<!-- Main Content Area -->
+<div class="lg:col-span-8 flex flex-col gap-md">
+<!-- Progress Chart (Bento Style) -->
+<div class="bg-surface rounded-[24px] p-md shadow-sm border border-outline-variant/30 flex flex-col gap-md relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary-container/20 rounded-full blur-3xl -mr-32 -mt-32 pointer-events-none"></div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Your Progress</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md mt-sm">
+<!-- Maths Progress -->
+<div class="bg-surface-container-low rounded-xl p-md flex items-center justify-between border border-outline-variant/20 hover:shadow-lg hover:shadow-black/5 transition-shadow">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs text-secondary-container">
+<span class="material-symbols-outlined" data-icon="calculate">calculate</span>
+<span class="font-label-md text-label-md uppercase">Maths</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">80%</span>
+</div>
+<!-- Circular Progress -->
+<div class="relative w-20 h-20">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-variant" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-secondary-container progress-circle" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="50.24" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary-container" data-icon="star" data-weight="fill" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+</div>
+<!-- Language Progress -->
+<div class="bg-surface-container-low rounded-xl p-md flex items-center justify-between border border-outline-variant/20 hover:shadow-lg hover:shadow-black/5 transition-shadow">
+<div class="flex flex-col gap-xs">
+<div class="flex items-center gap-xs text-primary-container">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+<span class="font-label-md text-label-md uppercase">Language</span>
+</div>
+<span class="font-headline-lg-mobile text-headline-lg-mobile">65%</span>
+</div>
+<!-- Circular Progress -->
+<div class="relative w-20 h-20">
+<svg class="w-full h-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-surface-variant" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary-container progress-circle" cx="50" cy="50" fill="none" r="40" stroke="currentColor" stroke-dasharray="251.2" stroke-dashoffset="87.92" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container" data-icon="menu_book" data-weight="fill" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Next Recommended Fun Activity -->
+<div class="bg-primary-container text-on-primary-container rounded-[24px] p-md shadow-md relative overflow-hidden group cursor-pointer hover:shadow-xl transition-all duration-300">
+<div class="absolute -right-10 -bottom-10 w-48 h-48 bg-white/10 rounded-full blur-2xl group-hover:scale-110 transition-transform duration-500"></div>
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md relative z-10">
+<div class="flex-1">
+<span class="font-label-md text-label-md uppercase tracking-widest text-primary-fixed-dim bg-white/20 px-3 py-1 rounded-full mb-sm inline-block">Next Fun Activity</span>
+<h3 class="font-headline-lg-mobile text-headline-lg-mobile mt-xs">Space Counting Adventure! 🚀</h3>
+<p class="font-body-md text-body-md text-on-primary-container/80 mt-2 max-w-md">Help Astronaut Alex count the stars and planets. Let's practice those numbers!</p>
+</div>
+<button class="h-12 px-6 bg-surface text-primary font-label-md text-label-md rounded-xl flex items-center gap-xs hover:bg-surface-container-low transition-colors shadow-sm self-end md:self-auto shrink-0">
+                            Start Now
+                            <span class="material-symbols-outlined text-[20px]" data-icon="play_arrow">play_arrow</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Sidebar -->
+<div class="lg:col-span-4 flex flex-col gap-md">
+<!-- Badges Earned -->
+<div class="bg-surface rounded-[24px] p-md shadow-sm border border-outline-variant/30 h-full flex flex-col">
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Your Badges</h2>
+<span class="font-label-md text-label-md text-primary bg-primary-container/20 px-3 py-1 rounded-full">2 Earned</span>
+</div>
+<div class="grid grid-cols-2 gap-sm flex-1">
+<!-- Badge 1 -->
+<div class="bg-tertiary-container/10 rounded-xl p-sm flex flex-col items-center justify-center text-center gap-xs border border-tertiary-container/20">
+<div class="w-16 h-16 rounded-full bg-tertiary-container text-on-tertiary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[32px]" data-icon="functions" data-weight="fill" style="font-variation-settings: 'FILL' 1;">functions</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface leading-tight mt-1">Counting Master</span>
+</div>
+<!-- Badge 2 -->
+<div class="bg-secondary-container/10 rounded-xl p-sm flex flex-col items-center justify-center text-center gap-xs border border-secondary-container/20">
+<div class="w-16 h-16 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[32px]" data-icon="g_translate" data-weight="fill" style="font-variation-settings: 'FILL' 1;">g_translate</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface leading-tight mt-1">Fast Translator</span>
+</div>
+<!-- Empty Badge Slot -->
+<div class="bg-surface-container-low rounded-xl p-sm flex flex-col items-center justify-center text-center gap-xs border border-dashed border-outline-variant/50 opacity-60">
+<div class="w-16 h-16 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]" data-icon="lock">lock</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant leading-tight mt-1">Next Badge</span>
+</div>
+<!-- Empty Badge Slot -->
+<div class="bg-surface-container-low rounded-xl p-sm flex flex-col items-center justify-center text-center gap-xs border border-dashed border-outline-variant/50 opacity-60">
+<div class="w-16 h-16 rounded-full bg-surface-variant text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-[32px]" data-icon="lock">lock</span>
+</div>
+<span class="font-label-md text-label-md text-on-surface-variant leading-tight mt-1">Next Badge</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface-container dark:bg-surface-container-highest shadow-lg rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-container-high transition-all duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md mt-1">Dashboard</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-full">
+<span class="material-symbols-outlined" data-icon="translate">translate</span>
+<span class="font-label-md text-label-md mt-1">Translate</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-full">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-md text-label-md mt-1">Classroom</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-full hidden">
+<span class="material-symbols-outlined" data-icon="menu_book">menu_book</span>
+<span class="font-label-md text-label-md mt-1">Learning</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-full">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md text-label-md mt-1">Profile</span>
+</button>
+</nav>
+</body></html>

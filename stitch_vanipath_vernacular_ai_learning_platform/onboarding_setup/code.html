@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VaniPath Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Lexend:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-secondary-container": "#fffbff",
+                      "error": "#ba1a1a",
+                      "outline": "#737686",
+                      "surface-container-high": "#e7e7f3",
+                      "surface-tint": "#0053db",
+                      "on-surface-variant": "#434655",
+                      "surface-container-low": "#f3f3fe",
+                      "on-secondary-fixed-variant": "#5a00c6",
+                      "on-tertiary-fixed-variant": "#005137",
+                      "on-background": "#191b23",
+                      "tertiary-fixed-dim": "#68dba9",
+                      "primary": "#004ac6",
+                      "surface-container-highest": "#e1e2ed",
+                      "inverse-surface": "#2e3039",
+                      "primary-container": "#2563eb",
+                      "on-tertiary": "#ffffff",
+                      "on-tertiary-fixed": "#002114",
+                      "on-tertiary-container": "#bdffdc",
+                      "surface-container": "#ededf9",
+                      "on-primary-fixed": "#00174b",
+                      "surface": "#faf8ff",
+                      "surface-dim": "#d9d9e5",
+                      "outline-variant": "#c3c6d7",
+                      "tertiary": "#006243",
+                      "secondary-fixed": "#eaddff",
+                      "primary-fixed": "#dbe1ff",
+                      "error-container": "#ffdad6",
+                      "tertiary-fixed": "#85f8c4",
+                      "surface-container-lowest": "#ffffff",
+                      "inverse-on-surface": "#f0f0fb",
+                      "inverse-primary": "#b4c5ff",
+                      "primary-fixed-dim": "#b4c5ff",
+                      "secondary": "#712ae2",
+                      "on-primary-fixed-variant": "#003ea8",
+                      "on-primary-container": "#eeefff",
+                      "surface-bright": "#faf8ff",
+                      "on-primary": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "secondary-container": "#8a4cfc",
+                      "on-surface": "#191b23",
+                      "tertiary-container": "#007d57",
+                      "on-secondary-fixed": "#25005a",
+                      "surface-variant": "#e1e2ed",
+                      "secondary-fixed-dim": "#d2bbff",
+                      "background": "#faf8ff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "md": "24px",
+                      "base": "4px",
+                      "xs": "8px",
+                      "xl": "64px",
+                      "gutter": "16px",
+                      "margin-mobile": "16px",
+                      "sm": "16px",
+                      "lg": "40px",
+                      "margin-desktop": "32px"
+              },
+              "fontFamily": {
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Lexend"
+                      ],
+                      "display-lg": [
+                              "Lexend"
+                      ],
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Lexend"
+                      ],
+                      "headline-md": [
+                              "Lexend"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "caption": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "caption": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            }
+          }
+        }
+      </script>
+<style>
+          .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+          }
+          .custom-shadow-1 {
+              box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+          }
+          .custom-shadow-2 {
+              box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.08);
+          }
+      </style>
+</head>
+<body class="bg-background text-on-background font-body-md text-body-md min-h-screen flex flex-col items-center justify-center p-margin-mobile md:p-margin-desktop">
+<!-- Top nav is suppressed as per instructions for Onboarding linear screen -->
+<main class="w-full max-w-[480px] bg-surface-container-lowest rounded-[24px] p-md custom-shadow-2 flex flex-col gap-[32px] md:gap-[40px] border border-outline-variant/30">
+<!-- Header -->
+<header class="flex flex-col items-center gap-sm text-center">
+<img alt="VaniPath Logo" class="w-[80px] h-[80px] object-cover rounded-xl" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA4sDQzYKUquOKoWWrAoJlPFozxS3V3_KTSCKr1rnvBF8Pc3_fsKQG7y2mdXbDBt7bfDK_IDdBbIPVCM1tmusO6DcKHlRctI91S_WDbUzO7Wn4otPmF8UxEYdWuT55PcDHxJJezSdF9HwOtE58G_hIX9mVrTF5WZOciIwNXT_fQuARVIT03t-dY098gzx6kskF_OyT_F8yBIxI9eh1XF9_kJl6kly3931WYA8KXVOOgo__9mJbrAh9tfA"/>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-primary tracking-tight">
+                Learn in the language you understand
+            </h1>
+<p class="font-body-md text-body-md text-on-surface-variant">Set up your personalized learning path.</p>
+</header>
+<!-- Role Selection -->
+<section class="flex flex-col gap-sm">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">I am a...</h2>
+<div class="grid grid-cols-3 gap-xs">
+<!-- Teacher -->
+<button class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<span class="material-symbols-outlined text-[32px] text-primary mb-2 group-hover:scale-110 transition-transform">school</span>
+<span class="font-label-md text-label-md text-on-surface">Teacher</span>
+</button>
+<!-- Student -->
+<button class="flex flex-col items-center justify-center p-sm rounded-xl border-2 border-primary bg-primary-fixed/20 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent custom-shadow-1">
+<span class="material-symbols-outlined text-[32px] text-primary mb-2" style="font-variation-settings: 'FILL' 1;">face</span>
+<span class="font-label-md text-label-md text-primary font-semibold">Student</span>
+</button>
+<!-- Validator -->
+<button class="flex flex-col items-center justify-center p-sm rounded-xl border border-outline-variant bg-surface-container-lowest hover:bg-surface-container-low transition-colors group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<span class="material-symbols-outlined text-[32px] text-primary mb-2 group-hover:scale-110 transition-transform">verified</span>
+<span class="font-label-md text-label-md text-on-surface">Validator</span>
+</button>
+</div>
+</section>
+<!-- Login / Mobile -->
+<section class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant" for="mobile-number">Mobile Number</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">phone_iphone</span>
+<input class="w-full h-[48px] pl-10 pr-4 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all placeholder:text-outline/70" id="mobile-number" placeholder="+91 00000 00000" type="tel"/>
+</div>
+</section>
+<!-- Language Setup -->
+<section class="flex flex-col gap-sm">
+<h2 class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Language Settings</h2>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="teaching-lang">Teaching Language</label>
+<div class="relative">
+<select class="w-full h-[48px] pl-4 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface appearance-none focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" id="teaching-lang">
+<option value="hindi">Hindi</option>
+<option value="english">English</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface" for="classroom-lang">Classroom Language</label>
+<div class="relative">
+<select class="w-full h-[48px] pl-4 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface appearance-none focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" id="classroom-lang">
+<option value="ho">Ho</option>
+<option value="mundari">Mundari</option>
+<option value="santhali">Santhali</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+</section>
+<!-- Offline Setup & Download -->
+<section class="flex flex-col gap-md p-md rounded-xl bg-surface-container-low border border-outline-variant/50">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary">cloud_off</span>
+                        Offline Setup
+                    </span>
+<span class="font-caption text-caption text-on-surface-variant mt-1">Enable learning without internet</span>
+</div>
+<!-- Toggle -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value=""/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="flex flex-col gap-xs">
+<button class="w-full h-[48px] bg-primary text-on-primary rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-on-primary-fixed-variant transition-colors custom-shadow-1">
+<span class="material-symbols-outlined">download</span>
+                    Download Language Pack
+                </button>
+<div class="flex flex-col gap-1 mt-2">
+<div class="flex justify-between font-caption text-caption text-on-surface-variant">
+<span>Downloading Ho pack...</span>
+<span>65%</span>
+</div>
+<div class="w-full h-2 bg-surface-dim rounded-full overflow-hidden">
+<div class="h-full bg-tertiary rounded-full" style="width: 65%;"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Continue Button -->
+<button class="w-full h-[48px] bg-primary-container text-on-primary-container rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary hover:text-on-primary transition-colors custom-shadow-1 mt-auto">
+            Continue to Dashboard
+            <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+</main>
+<!-- Navigation shells (TopAppBar, BottomNavBar) omitted intentionally as per guidelines for linear/onboarding screens -->
+</body></html>

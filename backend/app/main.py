@@ -9,6 +9,7 @@ from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import JSONResponse
+from sqlalchemy import text
 import time
 import os
 
@@ -168,12 +169,63 @@ def get_popular_cache():
     }
 
 
+# Database status endpoint
+@app.get("/api/db/status", tags=["Database"],
+         summary="Database connection status",
+         description="Shows which database engine is in use (SQLite or PostgreSQL/Supabase).")
+def db_status():
+    db_type = "postgresql" if settings.is_postgresql else "sqlite"
+    supabase = "connected" if settings.supabase_enabled else "not configured"
+    try:
+        from app.database.database import engine
+        with engine.connect() as conn:
+            conn.execute(text("SELECT 1"))
+        status = "connected"
+    except Exception as e:
+        status = f"error: {e}"
+    return {
+        "success": True,
+        "data": {
+            "engine": db_type,
+            "status": status,
+            "supabase": supabase,
+            "url_masked": settings.DATABASE_URL.split("@")[-1] if "@" in settings.DATABASE_URL else "(local)",
+        },
+    }
+
+
+# Storage status endpoint
+@app.get("/api/storage/status", tags=["Storage"],
+         summary="Supabase Storage status",
+         description="Check if Supabase Storage is configured.")
+def storage_status():
+    from app.services.supabase_storage import supabase_storage
+    return {
+        "success": True,
+        "data": {
+            "available": supabase_storage.available,
+            "buckets": list(supabase_storage.BUCKETS.values()),
+        },
+    }
+
+
 # Startup event
 @app.on_event("startup")
 async def startup_event():
     """Initialize on startup."""
+    from sqlalchemy import text as sql_text
+    db_type = "PostgreSQL (Supabase)" if settings.is_postgresql else "SQLite"
+
     # Create database tables
     create_tables()
+
+    # Test database connection
+    try:
+        with engine.connect() as conn:
+            conn.execute(sql_text("SELECT 1"))
+        db_status_str = "connected"
+    except Exception as e:
+        db_status_str = f"error: {e}"
 
     # Load translation engine data
     translation_engine.load_data()
@@ -181,6 +233,12 @@ async def startup_event():
     # Ensure audio directory exists
     os.makedirs(settings.AUDIO_CACHE_DIR, exist_ok=True)
 
+    # Check Supabase storage
+    from app.services.supabase_storage import supabase_storage
+    storage_status_str = "available" if supabase_storage.available else "not configured"
+
     print(f"[START] {settings.APP_NAME} v{settings.APP_VERSION} started")
-    print(f"[INFO] Translation engine: {translation_engine.get_stats()}")
-    print(f"[INFO] API docs: http://localhost:{settings.PORT}/docs")
+    print(f"[DB]    {db_type} — {db_status_str}")
+    print(f"[STORE] Supabase Storage — {storage_status_str}")
+    print(f"[TRANS] Translation engine: {translation_engine.get_stats()}")
+    print(f"[DOCS]  http://localhost:{settings.PORT}/docs")

@@ -11,23 +11,31 @@ from app.models.translation import Translation
 router = APIRouter(prefix="/api/translation", tags=["Translation"])
 
 
+def _extract_context(ctx) -> dict:
+    """Extract a plain dict from a TranslationContext model, raw dict, or None."""
+    if ctx is None:
+        return None
+    if isinstance(ctx, dict):
+        return ctx
+    # Pydantic model – pull attributes
+    return {
+        "grade": getattr(ctx, "grade", None),
+        "subject": getattr(ctx, "subject", None),
+        "topic": getattr(ctx, "topic", None),
+    }
+
+
 @router.post("/text", response_model=TranslationResponse,
              summary="Translate text",
              description="Translate text between Hindi and Santhali with educational context detection.")
 def translate_text(data: TranslationRequest, db: Session = Depends(get_db)):
-    context = None
-    if data.context:
-        context = {
-            "grade": data.context.grade,
-            "subject": data.context.subject,
-            "topic": data.context.topic,
-        }
+    ctx = _extract_context(data.context)
 
     result = translation_service.translate(
         text=data.text,
         source_language=data.source_language,
         target_language=data.target_language,
-        context=context,
+        context=ctx,
     )
 
     if "error" in result:
@@ -44,9 +52,9 @@ def translate_text(data: TranslationRequest, db: Session = Depends(get_db)):
         source_language=data.source_language,
         target_language=data.target_language,
         confidence=result["confidence"],
-        context_subject=data.context.subject if data.context else None,
-        context_grade=data.context.grade if data.context else None,
-        context_topic=data.context.topic if data.context else None,
+        context_subject=ctx.get("subject") if ctx else None,
+        context_grade=ctx.get("grade") if ctx else None,
+        context_topic=ctx.get("topic") if ctx else None,
         processing_time_ms=result["processing_time_ms"],
         requires_validation=result["requires_validation"],
     )

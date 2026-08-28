@@ -10,6 +10,9 @@ aiofiles==24.1.0
 pydantic-settings==2.5.2
 python-dotenv==1.0.1
 alembic==1.13.3
+psycopg2-binary==2.9.9
+supabase==2.10.0
+
 pytest==8.3.3
 pytest-asyncio==0.24.0
 pytest-httpx==0.30.0

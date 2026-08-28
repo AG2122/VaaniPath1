@@ -18,6 +18,19 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite:///./vanipath.db"
 
+    # Supabase
+    SUPABASE_URL: str = ""
+    SUPABASE_PUBLISHABLE_KEY: str = ""
+    SUPABASE_SECRET_KEY: str = ""
+
+    @property
+    def is_postgresql(self) -> bool:
+        return self.DATABASE_URL.startswith(("postgresql://", "postgresql+psycopg2://", "postgres://"))
+
+    @property
+    def supabase_enabled(self) -> bool:
+        return bool(self.SUPABASE_URL and self.SUPABASE_SECRET_KEY)
+
     # JWT
     SECRET_KEY: str = "dev-secret-key-change-in-production"
     ALGORITHM: str = "HS256"

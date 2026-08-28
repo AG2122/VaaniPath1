@@ -1,6 +1,7 @@
 """VaniPath - Pydantic Schemas"""
-from pydantic import BaseModel, EmailStr, Field
-from typing import Optional, List, Dict, Any
+import re
+from pydantic import BaseModel, EmailStr, Field, model_validator
+from typing import Optional, List, Dict, Any, Union
 from datetime import datetime
 
 
@@ -44,11 +45,80 @@ class TranslationContext(BaseModel):
     topic: Optional[str] = None
 
 
+def _parse_context_string(raw: str) -> Optional[Dict[str, Any]]:
+    """Parse a freeform context string like 'grade_2_mathematics' into a dict.
+
+    Supported formats:
+      grade_2_mathematics        -> {grade: 2, subject: mathematics}
+      grade_2_math_numbers       -> {grade: 2, subject: mathematics, topic: numbers}
+      mathematics                -> {subject: mathematics}
+      numbers                    -> {topic: numbers}
+      (empty string)             -> None
+    """
+    if not raw or not raw.strip():
+        return None
+
+    raw = raw.strip().lower()
+    result: Dict[str, Any] = {}
+
+    # Extract grade: look for "grade_N" or just a leading number
+    grade_match = re.search(r'grade[_\s]*(\d+)', raw)
+    if grade_match:
+        result["grade"] = int(grade_match.group(1))
+
+    # Known subject keywords (order matters – try longest first)
+    SUBJECT_KEYWORDS = [
+        "mathematics", "maths", "math",
+        "language", "reading", "writing",
+        "science", "classroom", "general",
+    ]
+    for subj in SUBJECT_KEYWORDS:
+        if subj in raw:
+            result["subject"] = subj
+            break
+
+    # Known topic keywords
+    TOPIC_KEYWORDS = [
+        "numbers", "counting", "addition", "subtraction",
+        "multiplication", "division", "shapes", "patterns",
+        "letters", "words", "reading", "writing",
+    ]
+    for topic in TOPIC_KEYWORDS:
+        if topic in raw:
+            result["topic"] = topic
+            break
+
+    return result if result else None
+
+
 class TranslationRequest(BaseModel):
-    text: str = Field(..., min_length=1, max_length=5000)
-    source_language: str = Field(default="hi", description="Source language code (hi or sat)")
-    target_language: str = Field(default="sat", description="Target language code (hi or sat)")
-    context: Optional[TranslationContext] = None
+    text: str = Field(..., min_length=1, max_length=5000,
+                       description="Text to translate")
+    source_language: str = Field(default="hi",
+                                description="Source language code (hi or sat)")
+    target_language: str = Field(default="sat",
+                                description="Target language code (hi or sat)")
+    context: Optional[Union[TranslationContext, str, Dict[str, Any]]] = Field(
+        default=None,
+        description=(
+            "Educational context. Accepts a structured object "
+            '{"grade": 2, "subject": "mathematics", "topic": "numbers"}, '
+            "or a freeform string like \"grade_2_mathematics\". "
+            "Structured format is preferred."
+        )
+    )
+
+    @model_validator(mode="before")
+    @classmethod
+    def normalize_context(cls, values: Any) -> Any:
+        """Allow context to be a string, dict, or TranslationContext."""
+        if isinstance(values, dict) and "context" in values:
+            ctx = values["context"]
+            if isinstance(ctx, str):
+                parsed = _parse_context_string(ctx)
+                values["context"] = parsed  # will become dict -> TranslationContext
+            # dict values pass through and Pydantic coerces them to TranslationContext
+        return values
 
 
 class TranslationResponse(BaseModel):

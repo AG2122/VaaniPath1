@@ -239,9 +239,7 @@
 <label class="font-label-md text-label-md text-on-surface" for="classroom-lang">Classroom Language</label>
 <div class="relative">
 <select class="w-full h-[48px] pl-4 pr-10 rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface appearance-none focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none" id="classroom-lang">
-<option value="ho">Ho</option>
-<option value="mundari">Mundari</option>
-<option value="santhali">Santhali</option>
+<option value="sat" selected>Santhali</option>
 </select>
 <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">arrow_drop_down</span>
 </div>
@@ -270,7 +268,7 @@
                 </button>
 <div class="flex flex-col gap-1 mt-2">
 <div class="flex justify-between font-caption text-caption text-on-surface-variant">
-<span>Downloading Ho pack...</span>
+<span>Downloading Santhali pack...</span>
 <span>65%</span>
 </div>
 <div class="w-full h-2 bg-surface-dim rounded-full overflow-hidden">
@@ -286,4 +284,48 @@
 </button>
 </main>
 <!-- Navigation shells (TopAppBar, BottomNavBar) omitted intentionally as per guidelines for linear/onboarding screens -->
+<script src="../shared/api.js"></script>
+<script>
+(function() {
+  const roleBtns = document.querySelectorAll('.grid.grid-cols-3 button');
+  let selectedRole = 'student';
+  roleBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      roleBtns.forEach(b => { b.classList.remove('border-2', 'border-primary', 'bg-primary-fixed/20'); b.classList.add('border', 'border-outline-variant'); });
+      btn.classList.add('border-2', 'border-primary', 'bg-primary-fixed/20');
+      btn.classList.remove('border', 'border-outline-variant');
+      selectedRole = ['teacher', 'student', 'validator'][i];
+    });
+  });
+
+  document.querySelector('button:last-of-type').addEventListener('click', async () => {
+    const mobile = document.getElementById('mobile-number').value;
+    const email = mobile ? mobile.replace(/[^0-9]/g, '') + '@vanipath.in' : 'teacher@vanipath.in';
+    try {
+      await apiLogin(email, 'teacher123');
+      window.location.href = '../teacher_dashboard/code.html';
+    } catch(e) {
+      try {
+        await apiRegister(selectedRole.charAt(0).toUpperCase() + selectedRole.slice(1), email, 'teacher123', selectedRole);
+        window.location.href = '../teacher_dashboard/code.html';
+      } catch(e2) {
+        alert('Could not connect to backend. Start the server with: uvicorn app.main:app --reload');
+      }
+    }
+  });
+
+  const dlBtn = document.querySelector('button.w-full.h-\\[48px\\].bg-primary');
+  if (dlBtn) {
+    dlBtn.addEventListener('click', async () => {
+      try {
+        const pack = await apiGetLanguagePack();
+        localStorage.setItem('vanipath_lang_pack', JSON.stringify(pack));
+        dlBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Downloaded!';
+      } catch(e) {
+        alert('Backend not running. Start with: uvicorn app.main:app --reload');
+      }
+    });
+  }
+})();
+</script>
 </body></html>

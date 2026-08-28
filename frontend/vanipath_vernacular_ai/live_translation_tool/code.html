@@ -234,7 +234,7 @@
 <span class="material-symbols-outlined">swap_horiz</span>
 </button>
 <button class="flex-1 flex justify-center items-center gap-2 font-label-md text-label-md text-on-surface py-2 hover:bg-surface-container-low rounded-lg transition-colors">
-                Ho
+                Santhali
                 <span class="material-symbols-outlined text-[18px] text-outline">expand_more</span>
 </button>
 </div>
@@ -247,7 +247,7 @@
 <span class="font-label-md text-label-md text-on-surface-variant">Hindi (Teacher)</span>
 </div>
 <div class="bg-surface p-md rounded-[24px] rounded-tl-none shadow-sm border border-outline-variant relative">
-<p class="font-headline-md text-headline-md text-on-surface">
+<p id="source-text" class="font-headline-md text-headline-md text-on-surface">
                     "बच्चों, आज हम संख्याओं के बारे में सीखेंगे।"
                 </p>
 <!-- Play Audio Action inside bubble -->
@@ -259,30 +259,28 @@
 <!-- AI Translation Meta (Center) -->
 <div class="flex justify-center items-center my-2">
 <div class="bg-surface-container rounded-full px-4 py-2 flex items-center gap-3 shadow-sm border border-outline-variant/50">
-<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">arrow_back_ios_new</span>
-<span class="font-label-md text-label-md text-on-surface-variant">Translating...</span>
-<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
-<span class="font-caption text-caption text-on-surface-variant">1.8 sec</span>
-<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
-<span class="font-caption text-caption text-tertiary font-medium flex items-center gap-1">
-<span class="material-symbols-outlined text-[14px]">check_circle</span>
-                    96% Confidence
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">arrow_back_ios_new</span><span id="translate-status" class="font-label-md text-label-md text-on-surface-variant">Ready</span>
+                <div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+                <span id="translate-time" class="font-caption text-caption text-on-surface-variant">--</span>
+                <div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+                <span id="translate-confidence" class="font-caption text-caption text-tertiary font-medium flex items-center gap-1">
+                <span class="material-symbols-outlined text-[14px]">check_circle</span>
+                    --
                 </span>
 </div>
 </div>
 <!-- Student Message (Bottom) -->
 <div class="flex flex-col gap-2 max-w-[90%] self-end items-end">
 <div class="flex items-center gap-2 px-2">
-<span class="font-label-md text-label-md text-on-surface-variant">Ho (Student)</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Santhali (Student)</span>
 </div>
 <div class="bg-primary-container text-on-primary-container p-md rounded-[24px] rounded-br-none shadow-sm relative w-full">
-<!-- Highlighted Target Language -->
-<p class="font-headline-md text-headline-md font-bold mb-2">
-                    "Hõñ, tisĩñg ābū lēkhā kō rēā' kō cēdō'a."
+<!-- Highlighted Target Language --><p id="translated-text" class="font-headline-md text-headline-md font-bold mb-2">
+                    "..."
                 </p>
-<!-- Literal / Native underneath for dual display context -->
-<p class="font-body-md text-body-md text-on-primary-container/80 pb-4">
-                    Yes, today we will learn about numbers.
+                <!-- Literal / Native underneath for dual display context -->
+                <p id="english-text" class="font-body-md text-body-md text-on-primary-container/80 pb-4">
+                    Loading...
                 </p>
 <div class="flex justify-between items-center pt-4 border-t border-on-primary-container/20 mt-2">
 <button class="flex items-center gap-2 font-label-md text-label-md text-on-primary-container hover:opacity-80 transition-opacity">
@@ -328,4 +326,59 @@
 <span class="font-label-md text-[10px] tracking-wide">Profile</span>
 </button>
 </nav>
+<script src="../shared/api.js"></script>
+<script>
+(function() {
+  const micBtn = document.querySelector('.mic-pulse button');
+  const sourceText = document.getElementById('source-text');
+  const translatedText = document.getElementById('translated-text');
+  const englishText = document.getElementById('english-text');
+  const statusEl = document.getElementById('translate-status');
+  const timeEl = document.getElementById('translate-time');
+  const confidenceEl = document.getElementById('translate-confidence');
+
+  async function doTranslate(text) {
+    statusEl.textContent = 'Translating...';
+    const start = performance.now();
+    try {
+      const res = await apiTranslate(text, 'hi', 'sat', { grade: 2, subject: 'mathematics' });
+      const elapsed = ((performance.now() - start) / 1000).toFixed(1);
+      if (res.success) {
+        translatedText.textContent = '"' + res.data.translated_text + '"';
+        englishText.textContent = text;
+        statusEl.textContent = 'Translated';
+        timeEl.textContent = elapsed + 's';
+        confidenceEl.innerHTML = '<span class="material-symbols-outlined text-[14px]">check_circle</span> ' + Math.round(res.data.confidence * 100) + '% Confidence';
+      }
+    } catch(e) {
+      statusEl.textContent = 'Error - Backend offline';
+      console.error(e);
+    }
+  }
+
+  // Mic button: use speech recognition if available, else demo
+  if (micBtn) {
+    micBtn.addEventListener('click', () => {
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'hi-IN';
+        recognition.interimResults = false;
+        recognition.onresult = (event) => {
+          const text = event.results[0][0].transcript;
+          sourceText.textContent = '"' + text + '"';
+          doTranslate(text);
+        };
+        recognition.onerror = () => doTranslate('बच्चों, आज हम संख्याओं के बारे में सीखेंगे।');
+        recognition.start();
+      } else {
+        doTranslate('बच्चों, आज हम संख्याओं के बारे में सीखेंगे।');
+      }
+    });
+  }
+
+  // Load initial translation on page load
+  doTranslate('बच्चों, आज हम संख्याओं के बारे में सीखेंगे।');
+})();
+</script>
 </body></html>

@@ -234,16 +234,14 @@
 <label class="block font-label-md text-label-md text-on-surface-variant mb-base">Target Language</label>
 <div class="relative">
 <select class="w-full h-12 rounded-xl border border-outline-variant px-4 appearance-none font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors bg-surface-container-lowest">
-<option>Ho</option>
-<option>Santhali</option>
-<option>Munda</option>
+<option value="sat">Santhali</option>
 </select>
 <span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
 </div>
 </div>
 <button class="w-full h-12 rounded-full ai-gradient text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 mt-md ai-glow transition-all">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">autorenew</span>
-                            Regenerate Lesson
+                            Generate Lesson
                         </button>
 </div>
 </div>
@@ -267,7 +265,7 @@
 <p class="font-body-md text-body-md text-on-surface mb-2">Introduce numbers 1-20 using visual counting beads commonly found in the community.</p>
 <div class="bg-surface-container rounded-lg p-sm border border-outline-variant/50">
 <p class="font-headline-md text-headline-md font-bold text-on-surface mb-1">Miya, Barya, Apiya...</p>
-<p class="font-body-md text-body-md text-on-surface-variant">One, Two, Three... (Ho language basics)</p>
+<p class="font-body-md text-body-md text-on-surface-variant">One, Two, Three... (Santhali basics)</p>
 </div>
 </div>
 <!-- Step 2: Demonstrate -->
@@ -283,7 +281,7 @@
 <!-- Step 3: Practice -->
 <div class="border-l-2 border-tertiary pl-sm">
 <h3 class="font-label-md text-label-md text-tertiary uppercase tracking-wider mb-2">3. Practice</h3>
-<p class="font-body-md text-body-md text-on-surface mb-2">Bilingual verbal repetition. Call out a number in the state language, students respond in Ho while showing the correct number of fingers or stones.</p>
+<p class="font-body-md text-body-md text-on-surface mb-2">Bilingual verbal repetition. Call out a number in the state language, students respond in Santhali while showing the correct number of fingers or stones.</p>
 <button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline mt-2">
 <span class="material-symbols-outlined text-sm">volume_up</span> Play Pronunciation Guide
                             </button>
@@ -331,4 +329,34 @@
 <span class="font-label-md text-label-md text-xs mt-1">Profile</span>
 </a>
 </nav>
+<script src="../shared/api.js"></script>
+<script>
+(async function() {
+  const lessonBtn = document.querySelector('.ai-gradient-btn');
+  const titleEl = document.getElementById('lesson-title');
+
+  async function generateLesson() {
+    try {
+      titleEl.textContent = 'Generating...';
+      const res = await apiGenerateLesson(2, 'Mathematics', 'Numbers 1-20', null, 'sat');
+      if (res.success) {
+        const d = res.data;
+        titleEl.textContent = d.topic || 'Lesson Plan';
+        // Update lesson content if elements exist
+        const objectiveEl = document.getElementById('lesson-objective');
+        if (objectiveEl) objectiveEl.textContent = d.objective || '';
+      }
+    } catch(e) {
+      titleEl.textContent = 'Backend offline';
+      console.error(e);
+    }
+  }
+
+  if (lessonBtn) {
+    lessonBtn.addEventListener('click', generateLesson);
+  }
+  // Auto-generate on load
+  generateLesson();
+})();
+</script>
 </body></html>

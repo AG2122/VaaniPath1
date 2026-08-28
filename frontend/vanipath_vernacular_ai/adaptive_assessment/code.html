@@ -247,18 +247,18 @@
 <main class="flex-grow flex flex-col items-center justify-start w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop pt-lg pb-xl">
 <!-- Header Section -->
 <div class="w-full mb-lg text-center mt-8">
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">Grade 2 Maths Assessment</h1>
-<p class="font-body-md text-body-md text-on-surface-variant">Question 10 of 10</p>
+<h1 id="assessment-title" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">Loading Assessment...</h1>
+<p id="question-counter" class="font-body-md text-body-md text-on-surface-variant">--</p>
 <!-- Progress Bar -->
 <div class="w-full max-w-md mx-auto h-2 bg-surface-variant rounded-full mt-4 overflow-hidden">
-<div class="h-full bg-primary rounded-full w-[90%] transition-all duration-500 ease-out"></div>
+<div id="assess-progress" class="h-full bg-primary rounded-full transition-all duration-500 ease-out" style="width:0%"></div>
 </div>
 </div>
 <!-- Question Canvas -->
 <div class="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant rounded-[24px] p-md mb-lg ambient-shadow transition-all duration-300 relative z-10" id="question-card">
 <!-- Question Content -->
 <div class="mb-8 text-center">
-<h2 class="font-headline-md text-headline-md text-on-surface mb-6">Count the apples</h2>
+<h2 id="question-text" class="font-headline-md text-headline-md text-on-surface mb-6">--</h2>
 <div class="w-full h-48 md:h-64 rounded-xl overflow-hidden bg-surface-container mb-6 flex items-center justify-center border border-outline-variant">
 <!-- Image representation -->
 <img alt="5 apples" class="w-full h-full object-contain p-4" data-alt="A brightly lit, cheerful, high-resolution digital illustration of exactly five shiny, perfectly shaped red apples resting on a soft wooden table. The style is modern, approachable, and educational, with clean lines and soft ambient lighting typical of a high-quality educational application. The background is a soft, muted pastel blue." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1Hq3uBmPn2uLBpmrhZ7Rg_VRrsBZtYh-zahp06VgzWlz9cReaFTX6PIYzUGNf5SX6QHeRg0ljCl8JOIdbwxMimbiXHcG97ss9_X00ovjBkkqyGAn85jiwSphI2KcsRRFuZpLEi9kIaCGJAZiizAuZitgk9lEsLAsP5UJmi--d35PTFt2_YpY4n2WtJVIoTNC5Rg_pHlVhFYKnaPrOVRKQnK_Fh7e2MLxdroB6DEgPblA65A8OeYc_XA"/>
@@ -267,17 +267,9 @@
 <!-- Options Grid -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <!-- Option 1 -->
-<button class="w-full h-16 border-2 border-outline-variant rounded-xl flex items-center justify-center hover:bg-surface-container-low hover:border-primary transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent option-btn" data-value="3">
-<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">3</span>
-</button>
-<!-- Option 2 (Correct) -->
-<button class="w-full h-16 border-2 border-outline-variant rounded-xl flex items-center justify-center hover:bg-surface-container-low hover:border-primary transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent option-btn" data-value="5" id="correct-btn">
-<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">5</span>
-</button>
-<!-- Option 3 -->
-<button class="w-full h-16 border-2 border-outline-variant rounded-xl flex items-center justify-center hover:bg-surface-container-low hover:border-primary transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent option-btn" data-value="7">
-<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">7</span>
-</button>
+<div id="options-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<p class="col-span-full text-center text-on-surface-variant py-4">Loading...</p>
+</div>
 </div>
 <div class="mt-6 flex justify-end hidden" id="submit-section">
 <button class="h-12 px-6 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm flex items-center gap-2" id="submit-btn">
@@ -294,11 +286,11 @@
 <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/10 rounded-full blur-2xl"></div>
 <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-secondary/10 rounded-full blur-2xl"></div>
 <div class="w-20 h-20 bg-primary-container text-on-primary-container rounded-full flex items-center justify-center mb-4 shadow-sm z-10">
-<span class="font-display-lg text-display-lg">9</span>
-<span class="font-headline-md text-headline-md mt-2">/10</span>
+<span id="result-score" class="font-display-lg text-display-lg">--</span>
+<span id="result-total" class="font-headline-md text-headline-md mt-2">/--</span>
 </div>
-<h3 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2 z-10">Great Job!</h3>
-<p class="font-body-md text-body-md text-on-surface-variant z-10">You've mastered most of the concepts.</p>
+<h3 id="result-message" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2 z-10">--</h3>
+<p id="result-detail" class="font-body-md text-body-md text-on-surface-variant z-10">--</p>
 </div>
 <!-- Analysis Cards -->
 <div class="col-span-1 md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-[24px] p-md flex flex-col shadow-sm">
@@ -381,76 +373,105 @@
 <span class="font-label-md text-label-md text-[10px]">Profile</span>
 </a>
 </nav>
+<script src="../shared/api.js"></script>
 <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const options = document.querySelectorAll('.option-btn');
-            const submitSection = document.getElementById('submit-section');
-            const submitBtn = document.getElementById('submit-btn');
-            const questionCard = document.getElementById('question-card');
-            const resultView = document.getElementById('result-view');
-            let selectedOption = null;
+(async function() {
+  let assessmentData = null;
+  let questions = [];
+  let currentIndex = 0;
+  let answers = [];
+  let selectedOption = null;
 
-            options.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Reset all buttons
-                    options.forEach(b => {
-                        b.classList.remove('border-primary', 'bg-primary-container/10');
-                        b.classList.add('border-outline-variant');
-                        b.querySelector('span').classList.remove('text-primary');
-                    });
+  const titleEl = document.getElementById('assessment-title');
+  const counterEl = document.getElementById('question-counter');
+  const progressBar = document.getElementById('assess-progress');
+  const questionText = document.getElementById('question-text');
+  const optionsGrid = document.getElementById('options-grid');
+  const submitSection = document.getElementById('submit-section');
+  const submitBtn = document.getElementById('submit-btn');
+  const questionCard = document.getElementById('question-card');
+  const resultView = document.getElementById('result-view');
+  const resultScore = document.getElementById('result-score');
+  const resultTotal = document.getElementById('result-total');
+  const resultMsg = document.getElementById('result-message');
+  const resultDetail = document.getElementById('result-detail');
 
-                    // Set selected state
-                    this.classList.remove('border-outline-variant');
-                    this.classList.add('border-primary', 'bg-primary-container/10');
-                    this.querySelector('span').classList.add('text-primary');
-                    
-                    selectedOption = this.getAttribute('data-value');
-                    
-                    // Show submit button
-                    submitSection.classList.remove('hidden');
-                });
-            });
+  function renderQuestion() {
+    if (currentIndex >= questions.length) return submitAssessment();
+    const q = questions[currentIndex];
+    titleEl.textContent = 'Grade 2 Mathematics Assessment';
+    counterEl.textContent = 'Question ' + (currentIndex + 1) + ' of ' + questions.length;
+    progressBar.style.width = ((currentIndex) / questions.length * 100) + '%';
+    questionText.textContent = q.santhali_text || q.hindi_text;
+    selectedOption = null;
+    submitSection.classList.add('hidden');
 
-            submitBtn.addEventListener('click', () => {
-                if(selectedOption) {
-                    // Simulate processing/assessment completion
-                    
-                    // Mark correct answer visually for a brief moment
-                    const correctBtn = document.getElementById('correct-btn');
-                    correctBtn.classList.remove('border-primary', 'bg-primary-container/10', 'border-outline-variant');
-                    correctBtn.classList.add('border-tertiary', 'bg-tertiary-container/20');
-                    correctBtn.querySelector('span').classList.add('text-tertiary');
-                    
-                    if(selectedOption !== "5") {
-                         const selected = document.querySelector(`[data-value="${selectedOption}"]`);
-                         selected.classList.remove('border-primary', 'bg-primary-container/10');
-                         selected.classList.add('border-error', 'bg-error-container/20');
-                         selected.querySelector('span').classList.add('text-error');
-                    }
-
-                    submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin" data-icon="sync">sync</span> Assessing...';
-
-                    setTimeout(() => {
-                        // Hide question card
-                        questionCard.classList.add('opacity-0', '-translate-y-4');
-                        
-                        setTimeout(() => {
-                            questionCard.classList.add('hidden');
-                            
-                            // Show Results
-                            resultView.classList.remove('hidden');
-                            // Trigger reflow
-                            void resultView.offsetWidth;
-                            resultView.classList.remove('opacity-0', 'translate-y-4');
-                            
-                            // Update header text to reflect completion
-                            document.querySelector('p.text-on-surface-variant').textContent = "Assessment Complete";
-                            document.querySelector('.bg-primary').style.width = '100%';
-
-                        }, 300); // Wait for fade out
-                    }, 800); // Artificial delay to show answer feedback
-                }
-            });
+    const opts = q.options || [];
+    optionsGrid.innerHTML = '';
+    opts.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.className = 'w-full h-16 border-2 border-outline-variant rounded-xl flex items-center justify-center hover:bg-surface-container-low hover:border-primary transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent option-btn';
+      btn.setAttribute('data-value', opt);
+      btn.innerHTML = '<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">' + opt + '</span>';
+      btn.addEventListener('click', function() {
+        optionsGrid.querySelectorAll('.option-btn').forEach(b => {
+          b.classList.remove('border-primary', 'bg-primary-container/10');
+          b.classList.add('border-outline-variant');
+          b.querySelector('span').classList.remove('text-primary');
         });
-    </script>
+        this.classList.remove('border-outline-variant');
+        this.classList.add('border-primary', 'bg-primary-container/10');
+        this.querySelector('span').classList.add('text-primary');
+        selectedOption = opt;
+        submitSection.classList.remove('hidden');
+      });
+      optionsGrid.appendChild(btn);
+    });
+  }
+
+  async function submitAssessment() {
+    submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Assessing...';
+    try {
+      const res = await apiSubmitAssessment(assessmentData.assessment_id, answers);
+      if (res.success) {
+        const d = res.data;
+        resultScore.textContent = Math.round(d.score);
+        resultTotal.textContent = '/' + d.total_questions;
+        resultMsg.textContent = d.score >= 80 ? 'Great Job!' : d.score >= 50 ? 'Good Effort!' : 'Keep Practicing!';
+        resultDetail.textContent = 'You got ' + d.correct_answers + ' out of ' + d.total_questions + ' correct.';
+      }
+    } catch(e) {
+      resultScore.textContent = '?';
+      resultMsg.textContent = 'Offline Mode';
+    }
+    questionCard.classList.add('opacity-0', '-translate-y-4');
+    setTimeout(() => {
+      questionCard.classList.add('hidden');
+      resultView.classList.remove('hidden');
+      void resultView.offsetWidth;
+      resultView.classList.remove('opacity-0', 'translate-y-4');
+      progressBar.style.width = '100%';
+    }, 300);
+  }
+
+  submitBtn.addEventListener('click', () => {
+    if (selectedOption !== null && currentIndex < questions.length) {
+      answers.push({ question_id: questions[currentIndex].id, answer: String(selectedOption) });
+      currentIndex++;
+      renderQuestion();
+    }
+  });
+
+  // Generate assessment on load
+  try {
+    assessmentData = await apiGenerateAssessment('Mathematics', 'Numbers 1-20', 2, 5);
+    if (assessmentData.success) {
+      questions = assessmentData.data.questions;
+      renderQuestion();
+    }
+  } catch(e) {
+    titleEl.textContent = 'Backend offline';
+  }
+})();
+</script>
 </body></html>

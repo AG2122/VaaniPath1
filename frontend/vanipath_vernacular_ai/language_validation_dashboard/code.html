@@ -218,7 +218,7 @@
 <button class="flex items-center gap-1 px-3 py-2 bg-surface rounded-lg border border-outline-variant hover:bg-surface-container-low transition-colors">
 <span class="font-body-md text-body-md font-medium">English</span>
 <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
-<span class="font-body-md text-body-md font-medium">Ho</span>
+<span class="font-body-md text-body-md font-medium">Santhali</span>
 <span class="material-symbols-outlined text-[16px] ml-1">expand_more</span>
 </button>
 </div>
@@ -241,9 +241,9 @@
 <p class="font-body-lg text-body-lg text-on-background">"Open your book."</p>
 </div>
 <div class="bg-primary-fixed/20 p-sm rounded-lg border border-primary/20">
-<span class="block font-caption text-caption text-on-surface-variant mb-1 uppercase tracking-wider">Proposed (Ho)</span>
-<p class="font-headline-md text-headline-md font-bold text-on-background">𑢹𑣉𑣞𑣉 𑣞𑣂𑣝</p>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Potha sid</p>
+<span class="block font-caption text-caption text-on-surface-variant mb-1 uppercase tracking-wider">Proposed (Santhali)</span>
+<p class="font-headline-md text-headline-md font-bold text-on-background">ᱠᱚᱨᱚᱜ ᱠᱤᱛᱟᱜ ᱫᱩᱴᱷᱤᱣᱮ ᱢᱮ</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Korok kithag duttem ma</p>
 </div>
 </div>
 </div>
@@ -278,9 +278,9 @@
 <p class="font-body-lg text-body-lg text-on-background">"Good morning, teacher."</p>
 </div>
 <div class="bg-primary-fixed/20 p-sm rounded-lg border border-primary/20">
-<span class="block font-caption text-caption text-on-surface-variant mb-1 uppercase tracking-wider">Proposed (Ho)</span>
-<p class="font-headline-md text-headline-md font-bold text-on-background">𑢾𑣂𑣞𑣂𑣝 𑣞𑣂𑣝, 𑣈𑣕𑣂</p>
-<p class="font-body-md text-body-md text-on-surface-variant mt-1">Sibil singi, sir</p>
+<span class="block font-caption text-caption text-on-surface-variant mb-1 uppercase tracking-wider">Proposed (Santhali)</span>
+<p class="font-headline-md text-headline-md font-bold text-on-background">ᱡᱚᱨᱟ ᱰᱟᱨᱚ, ᱜᱟᱨᱚᱲ</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Jora darao, garaod</p>
 </div>
 </div>
 </div>
@@ -314,7 +314,7 @@
 <p class="font-body-md text-body-md text-on-surface-variant line-through decoration-outline-variant decoration-1">"I am hungry."</p>
 </div>
 <div class="p-sm">
-<p class="font-body-md text-body-md text-on-surface-variant">𑣁𑣂𑣞 𑣞𑣂𑣝 (Ain renge)</p>
+<p class="font-body-md text-body-md text-on-surface-variant">ᱦᱚᱨᱚᱜ ᱢᱮᱨᱚᱜ (Horog merog)</p>
 </div>
 </div>
 </div>
@@ -357,4 +357,17 @@
 <span class="font-label-md text-label-md text-[10px] mt-1">Profile</span>
 </a>
 </nav>
+<script src="../shared/api.js"></script>
+<script>
+(async function() {
+  try {
+    const res = await apiGetPendingValidations();
+    if (res.success && res.data.items.length > 0) {
+      console.log('Loaded ' + res.data.items.length + ' pending validations');
+    }
+  } catch(e) {
+    console.log('Backend not available');
+  }
+})();
+</script>
 </body></html>

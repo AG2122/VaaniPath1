@@ -190,7 +190,7 @@
 <!-- Header Section -->
 <section class="flex flex-col md:flex-row md:justify-between md:items-end gap-sm">
 <div>
-<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-xs">Good Morning, Teacher 👋</h1>
+<h1 id="greeting" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-xs">Good Morning, Teacher 👋</h1>
 <p class="font-body-md text-body-md text-on-surface-variant">Here is your daily overview and quick access tools.</p>
 </div>
 <div class="inline-flex items-center gap-2 bg-tertiary-container/10 px-4 py-2 rounded-full border border-tertiary/20 w-fit">
@@ -274,7 +274,7 @@
 </div>
 <div>
 <p class="font-label-md text-label-md text-on-surface-variant mb-1">Students Active</p>
-<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">24</p>
+<p id="stat-students" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">--</p>
 </div>
 </div>
 <!-- Stat 2 -->
@@ -283,18 +283,17 @@
 <span class="material-symbols-outlined text-on-surface-variant">task_alt</span>
 </div>
 <div>
-<p class="font-label-md text-label-md text-on-surface-variant mb-1">Lessons Completed</p>
-<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">12</p>
-</div>
-</div>
-<!-- Stat 3 -->
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Lessons Completed</p><p id="stat-lessons" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">--</p>
+            </div>
+        </div>
+        <!-- Stat 3 -->
 <div class="bg-surface rounded-xl p-sm border border-outline-variant shadow-[0_2px_4px_rgba(0,0,0,0.05)] flex items-center gap-sm">
 <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center shrink-0">
 <span class="material-symbols-outlined text-on-surface-variant">translate</span>
 </div>
 <div>
 <p class="font-label-md text-label-md text-on-surface-variant mb-1">Translation Confidence</p>
-<p class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">96%</p>
+<p id="stat-confidence" class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">--</p>
 </div>
 </div>
 </div>
@@ -354,4 +353,29 @@
             }
         }
     </style>
+<script src="../shared/api.js"></script>
+<script>
+(async function() {
+  const user = getUser();
+  if (user && user.name) {
+    const hour = new Date().getHours();
+    const greeting = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
+    document.getElementById('greeting').textContent = greeting + ', ' + user.name.split(' ')[0] + '! 👋';
+  }
+  try {
+    const res = await apiGetTeacherDashboard();
+    if (res.success) {
+      const d = res.data;
+      document.getElementById('stat-students').textContent = d.student_count || 0;
+      document.getElementById('stat-lessons').textContent = d.lessons_completed || 0;
+      document.getElementById('stat-confidence').textContent = (d.translation_confidence || 0) + '%';
+    }
+  } catch(e) {
+    console.log('Backend not available, showing defaults');
+    document.getElementById('stat-students').textContent = '0';
+    document.getElementById('stat-lessons').textContent = '0';
+    document.getElementById('stat-confidence').textContent = '--';
+  }
+})();
+</script>
 </body></html>

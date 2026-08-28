@@ -139,58 +139,8 @@
             </button>
 </section>
 <!-- Quick Phrases Grid -->
-<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
-<!-- Phrase 1 -->
-<button class="bg-surface rounded-[24px] p-md border border-outline-variant shadow-sm hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col text-left group">
-<div class="flex justify-between items-start mb-sm w-full">
-<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Open your book</span>
-<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined icon-filled">volume_up</span>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-lg p-sm w-full border border-surface-dim">
-<p class="font-headline-md text-headline-md font-bold text-on-surface mb-base">अपनी किताब खोलो</p>
-<p class="font-body-md text-body-md text-on-surface-variant">Apni kitaab kholo (Hindi)</p>
-</div>
-<div class="mt-xs bg-surface-container rounded-lg p-sm w-full">
-<p class="font-headline-md text-headline-md font-bold text-tertiary-container mb-base">Puthi uṭhkeñ</p>
-<p class="font-body-md text-body-md text-on-surface-variant">(Ho)</p>
-</div>
-</button>
-<!-- Phrase 2 -->
-<button class="bg-surface rounded-[24px] p-md border border-outline-variant shadow-sm hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col text-left group">
-<div class="flex justify-between items-start mb-sm w-full">
-<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Listen carefully</span>
-<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined icon-filled">volume_up</span>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-lg p-sm w-full border border-surface-dim">
-<p class="font-headline-md text-headline-md font-bold text-on-surface mb-base">ध्यान से सुनो</p>
-<p class="font-body-md text-body-md text-on-surface-variant">Dhyaan se suno (Hindi)</p>
-</div>
-<div class="mt-xs bg-surface-container rounded-lg p-sm w-full">
-<p class="font-headline-md text-headline-md font-bold text-tertiary-container mb-base">Ayuḿ ṭhika</p>
-<p class="font-body-md text-body-md text-on-surface-variant">(Ho)</p>
-</div>
-</button>
-<!-- Phrase 3 -->
-<button class="bg-surface rounded-[24px] p-md border border-outline-variant shadow-sm hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col text-left group">
-<div class="flex justify-between items-start mb-sm w-full">
-<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">Repeat after me</span>
-<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
-<span class="material-symbols-outlined icon-filled">volume_up</span>
-</div>
-</div>
-<div class="bg-surface-container-low rounded-lg p-sm w-full border border-surface-dim">
-<p class="font-headline-md text-headline-md font-bold text-on-surface mb-base">मेरे बाद दोहराओ</p>
-<p class="font-body-md text-body-md text-on-surface-variant">Mere baad doharao (Hindi)</p>
-</div>
-<div class="mt-xs bg-surface-container rounded-lg p-sm w-full">
-<p class="font-headline-md text-headline-md font-bold text-tertiary-container mb-base">Ayiñ tayam te mena</p>
-<p class="font-body-md text-body-md text-on-surface-variant">(Ho)</p>
-</div>
-</button>
+<section id="phrases-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<p class="text-on-surface-variant col-span-full text-center py-8">Loading phrases...</p>
 </section>
 </main>
 <!-- BottomNavBar -->
@@ -250,4 +200,59 @@
             }
         }
     </style>
+<script src="../shared/api.js"></script>
+<script>
+(async function() {
+  const grid = document.getElementById('phrases-grid');
+  try {
+    const res = await apiGetClassroomPhrases();
+    if (res.success && res.data.phrases.length > 0) {
+      grid.innerHTML = '';
+      res.data.phrases.forEach(p => {
+        const card = document.createElement('button');
+        card.className = 'bg-surface rounded-[24px] p-md border border-outline-variant shadow-sm hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col text-left group';
+        card.innerHTML = `
+          <div class="flex justify-between items-start mb-sm w-full">
+            <span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">${p.english || ''}</span>
+            <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined icon-filled">volume_up</span>
+            </div>
+          </div>
+          <div class="bg-surface-container-low rounded-lg p-sm w-full border border-surface-dim">
+            <p class="font-headline-md text-headline-md font-bold text-on-surface mb-base">${p.hindi}</p>
+            <p class="font-body-md text-body-md text-on-surface-variant">(Hindi)</p>
+          </div>
+          <div class="mt-xs bg-surface-container rounded-lg p-sm w-full">
+            <p class="font-headline-md text-headline-md font-bold text-tertiary-container mb-base">${p.santhali}</p>
+            <p class="font-body-md text-body-md text-on-surface-variant">(Santhali)</p>
+          </div>
+        `;
+        card.addEventListener('click', async () => {
+          try {
+            const tr = await apiTeacherToStudent(p.hindi, null, 2, 'General');
+            if (tr.success) {
+              card.querySelector('.text-tertiary-container').style.color = '#006243';
+              card.querySelector('.text-tertiary-container').textContent = tr.data.translated_text;
+            }
+          } catch(e) { console.error(e); }
+        });
+        grid.appendChild(card);
+      });
+    }
+  } catch(e) {
+    grid.innerHTML = '<p class="text-error col-span-full text-center py-8">Could not load phrases. Backend offline.</p>';
+  }
+
+  // Start Live Session button
+  const sessionBtn = document.querySelector('button:has(.icon-filled.record_voice_over)');
+  if (sessionBtn) {
+    sessionBtn.addEventListener('click', async () => {
+      try {
+        const res = await apiTeacherToStudent('Classroom session started!', null, 2, 'General');
+        if (res.success) alert('Session started! Session ID: ' + res.data.session_id);
+      } catch(e) { alert('Backend offline. Start with: uvicorn app.main:app --reload'); }
+    });
+  }
+})();
+</script>
 </body></html>

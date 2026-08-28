@@ -141,7 +141,7 @@
 <button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low">
 <span class="material-symbols-outlined">arrow_back</span>
 </button>
-<span class="font-headline-md text-headline-md font-bold text-primary">Fruits</span>
+<span id="category-name" class="font-headline-md text-headline-md font-bold text-primary">Animals</span>
 <button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-low">
 <span class="material-symbols-outlined">more_vert</span>
 </button>
@@ -154,15 +154,15 @@
 <span class="material-symbols-outlined">arrow_back</span>
 <span class="font-label-md text-label-md">Back to Categories</span>
 </button>
-<h1 class="font-headline-lg text-headline-lg text-on-surface">Fruits</h1>
+<h1 id="category-title" class="font-headline-lg text-headline-lg text-on-surface">Animals</h1>
 <div class="w-24"></div> <!-- Spacer -->
 </div>
 <!-- Progress -->
 <div class="w-full max-w-sm mb-6 flex items-center gap-4">
 <div class="flex-1 h-2 bg-surface-container rounded-full overflow-hidden">
-<div class="h-full bg-primary rounded-full w-1/3"></div>
+<div id="progress-bar" class="h-full bg-primary rounded-full" style="width:0%"></div>
 </div>
-<span class="font-label-md text-label-md text-on-surface-variant">4 / 12</span>
+<span id="progress-text" class="font-label-md text-label-md text-on-surface-variant">0 / 0</span>
 </div>
 <!-- Flashcard -->
 <div class="w-full max-w-md bg-surface-container-lowest rounded-3xl shadow-lg flex flex-col overflow-hidden border border-outline-variant/30 mb-8 transform transition-transform duration-300 hover:shadow-xl">
@@ -181,10 +181,10 @@
 <span class="material-symbols-outlined text-4xl icon-fill">volume_up</span>
 </button>
 <div class="mt-8 mb-2">
-<h2 class="font-display-lg text-display-lg text-on-surface">आम</h2>
+<h2 id="card-hindi" class="font-display-lg text-display-lg text-on-surface">--</h2>
 </div>
 <div class="inline-block bg-surface-container rounded-lg px-4 py-2 mt-2">
-<p class="font-body-lg text-body-lg text-on-surface-variant">Uli</p>
+<p id="card-santhali" class="font-body-lg text-body-lg text-on-surface-variant">--</p>
 </div>
 </div>
 </div>
@@ -227,4 +227,39 @@
 <!-- Spacer for fixed nav content area -->
 <div class="h-[72px]"></div>
 </nav>
+<script src="../shared/api.js"></script>
+<script>
+(async function() {
+  let cards = [];
+  let currentIndex = 0;
+  const hindiEl = document.getElementById('card-hindi');
+  const santhaliEl = document.getElementById('card-santhali');
+  const progressText = document.getElementById('progress-text');
+  const progressBar = document.getElementById('progress-bar');
+  const prevBtn = document.querySelector('button:has(.chevron_left)');
+  const nextBtn = document.querySelector('button:has(.chevron_right)');
+
+  function showCard() {
+    if (cards.length === 0) return;
+    const card = cards[currentIndex];
+    hindiEl.textContent = card.hindi;
+    santhaliEl.textContent = card.santhali + (card.pronunciation ? ' (' + card.pronunciation + ')' : '');
+    progressText.textContent = (currentIndex + 1) + ' / ' + cards.length;
+    progressBar.style.width = ((currentIndex + 1) / cards.length * 100) + '%';
+  }
+
+  try {
+    const res = await apiGenerateFlashcards('Animals', 12, 1);
+    if (res.success) {
+      cards = res.data.flashcards;
+      showCard();
+    }
+  } catch(e) {
+    hindiEl.textContent = 'Backend offline';
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; showCard(); } });
+  if (nextBtn) nextBtn.addEventListener('click', () => { if (currentIndex < cards.length - 1) { currentIndex++; showCard(); } });
+})();
+</script>
 </body></html>

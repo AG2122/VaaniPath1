@@ -131,8 +131,8 @@
 <!-- Welcome & Streak -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-md mb-lg">
 <div>
-<h1 class="font-display-lg text-display-lg text-on-surface">Hi, Arjun! 👋</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Ready for another fun day of learning?</p>
+<h1 id="student-greeting" class="font-display-lg text-display-lg text-on-surface">Hi, Student! 👋</h1>
+<p id="student-subtitle" class="font-body-lg text-body-lg text-on-surface-variant mt-xs">Loading your progress...</p>
 </div>
 <div class="bg-surface-container-low rounded-2xl p-sm flex items-center gap-sm shadow-sm border border-outline-variant/30">
 <div class="w-12 h-12 rounded-full bg-error-container text-error flex items-center justify-center">
@@ -140,7 +140,7 @@
 </div>
 <div>
 <p class="font-label-md text-label-md text-on-surface-variant uppercase tracking-wider">Learning Streak</p>
-<p class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">5 Days <span class="text-error">🔥</span></p>
+<p id="streak-count" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">-- Days <span class="text-error">🔥</span></p>
 </div>
 </div>
 </div>
@@ -159,7 +159,7 @@
 <span class="material-symbols-outlined" data-icon="calculate">calculate</span>
 <span class="font-label-md text-label-md uppercase">Maths</span>
 </div>
-<span class="font-headline-lg-mobile text-headline-lg-mobile">80%</span>
+<span id="math-score" class="font-headline-lg-mobile text-headline-lg-mobile">--%</span>
 </div>
 <!-- Circular Progress -->
 <div class="relative w-20 h-20">
@@ -179,7 +179,7 @@
 <span class="material-symbols-outlined" data-icon="translate">translate</span>
 <span class="font-label-md text-label-md uppercase">Language</span>
 </div>
-<span class="font-headline-lg-mobile text-headline-lg-mobile">65%</span>
+<span id="lang-score" class="font-headline-lg-mobile text-headline-lg-mobile">--%</span>
 </div>
 <!-- Circular Progress -->
 <div class="relative w-20 h-20">
@@ -216,7 +216,7 @@
 <div class="bg-surface rounded-[24px] p-md shadow-sm border border-outline-variant/30 h-full flex flex-col">
 <div class="flex items-center justify-between mb-sm">
 <h2 class="font-headline-md text-headline-md text-on-surface">Your Badges</h2>
-<span class="font-label-md text-label-md text-primary bg-primary-container/20 px-3 py-1 rounded-full">2 Earned</span>
+<span id="badge-count" class="font-label-md text-label-md text-primary bg-primary-container/20 px-3 py-1 rounded-full">0 Earned</span>
 </div>
 <div class="grid grid-cols-2 gap-sm flex-1">
 <!-- Badge 1 -->
@@ -275,4 +275,28 @@
 <span class="font-label-md text-label-md mt-1">Profile</span>
 </button>
 </nav>
+<script src="../shared/api.js"></script>
+<script>
+(async function() {
+  try {
+    const studentsRes = await apiGetStudents();
+    if (studentsRes.success && studentsRes.data.students.length > 0) {
+      const student = studentsRes.data.students[0];
+      const progressRes = await apiGetStudentProgress(student.id);
+      if (progressRes.success) {
+        const p = progressRes.data;
+        document.getElementById('student-greeting').textContent = 'Hi, ' + p.name + '! \ud83d\udc4b';
+        document.getElementById('student-subtitle').textContent = 'Ready for another fun day of learning?';
+        document.getElementById('streak-count').innerHTML = p.learning_streak + ' Days <span class="text-error">\ud83d\udd25</span>';
+        document.getElementById('math-score').textContent = Math.round(p.average_score) + '%';
+        document.getElementById('lang-score').textContent = Math.round(p.average_score * 0.8) + '%';
+        const badges = p.badges || [];
+        document.getElementById('badge-count').textContent = badges.length + ' Earned';
+      }
+    }
+  } catch(e) {
+    console.log('Backend not available');
+  }
+})();
+</script>
 </body></html>

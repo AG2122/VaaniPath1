@@ -194,11 +194,11 @@
 <header class="hidden md:flex fixed top-0 w-full z-50 bg-surface shadow-sm h-16 justify-between items-center px-margin-desktop">
 <div class="font-headline-lg text-headline-lg font-bold text-primary">VaniPath</div>
 <nav class="flex gap-8">
-<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
-<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">translate</span>Translate</a>
-<a class="text-primary font-bold font-label-md text-label-md flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>Classroom</a>
-<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">menu_book</span>Learning</a>
-<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="#"><span class="material-symbols-outlined">person</span>Profile</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="../teacher_dashboard/code.html"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="../live_translation_tool/code.html"><span class="material-symbols-outlined">translate</span>Translate</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="../classroom_mode/code.html"><span class="material-symbols-outlined">school</span>Classroom</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="../bilingual_flashcards/code.html"><span class="material-symbols-outlined">menu_book</span>Learning</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-colors flex flex-col items-center gap-1" href="../student_progress_dashboard/code.html"><span class="material-symbols-outlined">person</span>Profile</a>
 </nav>
 <div class="flex items-center gap-4">
 <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">cloud_done</span>
@@ -224,22 +224,22 @@
 <div class="space-y-sm">
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-base">Subject</label>
-<input class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" readonly="" type="text" value="Maths"/>
+<input id="subject-input" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="text" value="Maths"/>
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-base">Topic</label>
-<input class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" readonly="" type="text" value="Numbers 1-20"/>
+<input id="topic-input" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors" type="text" value="Numbers 1-20"/>
 </div>
 <div>
 <label class="block font-label-md text-label-md text-on-surface-variant mb-base">Target Language</label>
 <div class="relative">
-<select class="w-full h-12 rounded-xl border border-outline-variant px-4 appearance-none font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors bg-surface-container-lowest">
+<select id="language-select" class="w-full h-12 rounded-xl border border-outline-variant px-4 appearance-none font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors bg-surface-container-lowest">
 <option value="sat">Santhali</option>
 </select>
 <span class="material-symbols-outlined absolute right-4 top-3 text-on-surface-variant pointer-events-none">expand_more</span>
 </div>
 </div>
-<button class="w-full h-12 rounded-full ai-gradient text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 mt-md ai-glow transition-all">
+<button id="generate-btn" type="button" class="w-full h-12 rounded-full ai-gradient text-on-secondary font-label-md text-label-md flex items-center justify-center gap-2 mt-md ai-glow transition-all">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">autorenew</span>
                             Generate Lesson
                         </button>
@@ -282,7 +282,7 @@
 <div class="border-l-2 border-tertiary pl-sm">
 <h3 class="font-label-md text-label-md text-tertiary uppercase tracking-wider mb-2">3. Practice</h3>
 <p class="font-body-md text-body-md text-on-surface mb-2">Bilingual verbal repetition. Call out a number in the state language, students respond in Santhali while showing the correct number of fingers or stones.</p>
-<button class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline mt-2">
+<button id="pronunciation-btn" type="button" class="text-primary font-label-md text-label-md flex items-center gap-1 hover:underline mt-2">
 <span class="material-symbols-outlined text-sm">volume_up</span> Play Pronunciation Guide
                             </button>
 </div>
@@ -290,15 +290,15 @@
 </div>
 <!-- Action Buttons -->
 <div class="flex flex-col sm:flex-row gap-sm justify-end pt-sm">
-<button class="h-12 px-6 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<button id="translate-btn" type="button" class="h-12 px-6 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
 <span class="material-symbols-outlined">translate</span>
                         Translate Worksheet
                     </button>
-<button class="h-12 px-6 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
+<button id="save-btn" type="button" class="h-12 px-6 rounded-full border border-outline-variant text-on-surface font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-surface-container-low transition-colors">
 <span class="material-symbols-outlined">bookmark_border</span>
                         Save Lesson Plan
                     </button>
-<button class="h-12 px-6 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
+<button id="classroom-btn" type="button" class="h-12 px-6 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-md">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
                         Use in Classroom
                     </button>
@@ -308,54 +308,163 @@
 </main>
 <!-- BottomNavBar Mobile -->
 <nav class="md:hidden fixed bottom-0 w-full z-50 bg-surface-container border-t border-outline-variant shadow-lg flex justify-around items-center px-4 py-2 rounded-t-xl">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md text-label-md text-xs mt-1">Dashboard</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined">translate</span>
 <span class="font-label-md text-label-md text-xs mt-1">Translate</span>
 </a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 ease-in-out w-20 h-14" href="#">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 ease-in-out w-20 h-14" href="../classroom_mode/code.html">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
 <span class="font-label-md text-label-md text-xs mt-1">Classroom</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="../bilingual_flashcards/code.html">
 <span class="material-symbols-outlined">menu_book</span>
 <span class="font-label-md text-label-md text-xs mt-1">Learning</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out w-16 h-14 rounded-xl" href="../student_progress_dashboard/code.html">
 <span class="material-symbols-outlined">person</span>
 <span class="font-label-md text-label-md text-xs mt-1">Profile</span>
 </a>
 </nav>
 <script src="../shared/api.js"></script>
 <script>
-(async function() {
-  const lessonBtn = document.querySelector('.ai-gradient-btn');
-  const titleEl = document.getElementById('lesson-title');
+(function() {
+  // ─── Back button ─────────────────────────────────────────
+  var h1 = document.querySelector('h1');
+  if (h1) {
+    h1.style.cursor = 'pointer';
+    h1.addEventListener('click', function() {
+      window.location.href = '../teacher_dashboard/code.html';
+    });
+  }
 
+  // ─── DOM refs ────────────────────────────────────────────
+  var subjectInput = document.getElementById('subject-input');
+  var topicInput = document.getElementById('topic-input');
+  var langSelect = document.getElementById('language-select');
+  var generateBtn = document.getElementById('generate-btn');
+  var pronunciationBtn = document.getElementById('pronunciation-btn');
+  var translateBtn = document.getElementById('translate-btn');
+  var saveBtn = document.getElementById('save-btn');
+  var classroomBtn = document.getElementById('classroom-btn');
+
+  var lessonData = null; // store last generated lesson
+  var audioMode = localStorage.getItem('vanipath_audio_mode') || (navigator.onLine ? 'online' : 'offline');
+  var currentAudio = null;
+
+  // ─── Generate Lesson ─────────────────────────────────────
   async function generateLesson() {
+    if (!generateBtn) return;
+    var subject = subjectInput ? subjectInput.value : 'Mathematics';
+    var topic = topicInput ? topicInput.value : 'Numbers 1-20';
+    var lang = langSelect ? langSelect.value : 'sat';
+    generateBtn.disabled = true;
+    generateBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Generating...';
     try {
-      titleEl.textContent = 'Generating...';
-      const res = await apiGenerateLesson(2, 'Mathematics', 'Numbers 1-20', null, 'sat');
+      var res = await apiGenerateLesson(2, subject, topic, null, lang);
       if (res.success) {
-        const d = res.data;
-        titleEl.textContent = d.topic || 'Lesson Plan';
-        // Update lesson content if elements exist
-        const objectiveEl = document.getElementById('lesson-objective');
-        if (objectiveEl) objectiveEl.textContent = d.objective || '';
+        lessonData = res.data;
+        renderLesson(res.data);
+      } else {
+        renderError('Failed to generate lesson.');
       }
     } catch(e) {
-      titleEl.textContent = 'Backend offline';
       console.error(e);
+      renderError('Backend offline. Make sure the server is running.');
+    } finally {
+      generateBtn.disabled = false;
+      generateBtn.innerHTML = '<span class="material-symbols-outlined" style="font-variation-settings: \u0027FILL\u0027 1;">autorenew</span> Generate Lesson';
     }
   }
 
-  if (lessonBtn) {
-    lessonBtn.addEventListener('click', generateLesson);
+  function renderLesson(d) {
+    var statusEl = document.querySelector('.bg-secondary-fixed');
+    if (statusEl) statusEl.textContent = 'Generated';
+    var stepSections = document.querySelectorAll('.space-y-md > div.border-l-2');
+    // Step 1: Explain
+    if (stepSections[0]) {
+      var p = stepSections[0].querySelector('p');
+      if (p && d.objective) p.textContent = d.objective;
+      var titleBox = stepSections[0].querySelector('.bg-surface-container p');
+      if (titleBox && d.child_friendly_explanation) titleBox.textContent = d.child_friendly_explanation;
+    }
+    // Step 2: Demonstrate
+    if (stepSections[1]) {
+      var p2 = stepSections[1].querySelector('p');
+      if (p2 && d.classroom_activity) p2.textContent = d.classroom_activity;
+    }
+    // Step 3: Practice
+    if (stepSections[2]) {
+      var p3 = stepSections[2].querySelector('p');
+      if (p3 && d.practice_questions) p3.textContent = Array.isArray(d.practice_questions) ? d.practice_questions.join(' ') : (d.practice_questions || '');
+    }
   }
-  // Auto-generate on load
+
+  function renderError(msg) {
+    var stepSections = document.querySelectorAll('.space-y-md > div.border-l-2');
+    if (stepSections[0]) {
+      var p = stepSections[0].querySelector('p');
+      if (p) p.textContent = msg;
+    }
+  }
+
+  if (generateBtn) generateBtn.addEventListener('click', generateLesson);
+
+  // ─── Play Pronunciation Guide ────────────────────────────
+  async function playPronunciation() {
+    var phrase = 'बच्चों, आज हम संख्याओं के बारे में सीखेंगे।';
+    if (lessonData && lessonData.child_friendly_explanation) phrase = lessonData.child_friendly_explanation;
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    try {
+      var formData = new FormData();
+      formData.append('text', phrase);
+      formData.append('language', 'sat');
+      formData.append('mode', audioMode);
+      var res = await fetch('/api/speech/tts', { method: 'POST', body: formData });
+      var data = await res.json();
+      if (data.success && data.data && data.data.audio_url) {
+        currentAudio = new Audio(data.data.audio_url);
+        currentAudio.volume = 1;
+        currentAudio.play().catch(function(err) { console.error('Audio play error:', err); });
+      } else if (data.data && data.data.audio_unavailable) {
+        console.warn('Audio unavailable offline for:', phrase);
+      }
+    } catch(e) { console.error('TTS error:', e); }
+  }
+  if (pronunciationBtn) pronunciationBtn.addEventListener('click', playPronunciation);
+
+  // ─── Translate Worksheet ──────────────────────────────────
+  if (translateBtn) translateBtn.addEventListener('click', function() {
+    window.location.href = '../worksheet_generator/code.html';
+  });
+
+  // ─── Save Lesson Plan ────────────────────────────────────
+  if (saveBtn) saveBtn.addEventListener('click', function() {
+    if (!lessonData) { lessonData = {}; }
+    lessonData.subject = subjectInput ? subjectInput.value : '';
+    lessonData.topic = topicInput ? topicInput.value : '';
+    lessonData.language = langSelect ? langSelect.value : 'sat';
+    lessonData.saved_at = new Date().toISOString();
+    try {
+      var saved = JSON.parse(localStorage.getItem('vanipath_saved_lessons') || '[]');
+      saved.push(lessonData);
+      localStorage.setItem('vanipath_saved_lessons', JSON.stringify(saved));
+      saveBtn.innerHTML = '<span class="material-symbols-outlined">check</span> Saved!';
+      setTimeout(function() {
+        saveBtn.innerHTML = '<span class="material-symbols-outlined">bookmark_border</span> Save Lesson Plan';
+      }, 2000);
+    } catch(e) { console.error('Save error:', e); }
+  });
+
+  // ─── Use in Classroom ────────────────────────────────────
+  if (classroomBtn) classroomBtn.addEventListener('click', function() {
+    window.location.href = '../classroom_mode/code.html';
+  });
+
+  // ─── Auto-generate on load ────────────────────────────────
   generateLesson();
 })();
 </script>

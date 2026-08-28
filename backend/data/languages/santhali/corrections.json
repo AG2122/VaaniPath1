@@ -12,7 +12,7 @@
     "notes": "Standard listening instruction"
   },
   {
-    "hindi": "बच्चों, आज हम संख्याओं के बारे में सीखेंगे।",
+    "hindi": "बच्चों, आज हम संख्याओं के बारे में सीखेंगें।",
     "corrected": "ᱡᱟᱨᱤᱚᱜ, ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱥᱟᱱᱛᱟᱲᱤ ᱨᱚᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।",
     "validator": "demo_validator",
     "notes": "Numbers lesson opening"
@@ -28,5 +28,17 @@
     "corrected": "ᱜᱚᱨᱚ ᱥᱟᱢᱚᱜ!",
     "validator": "demo_validator",
     "notes": "Encouragement phrase"
+  },
+  {
+    "hindi": "बहुत अच्चा!",
+    "corrected": "ᱜᱚᱨᱚ ᱥᱟᱢᱚᱜ!",
+    "validator": "demo_validator",
+    "notes": "Common spelling variant (double cha instead of chha)"
+  },
+  {
+    "hindi": "कॉन जवाब जानता है?",
+    "corrected": "ᱠᱩᱱᱚ ᱟᱛᱟᱨᱚᱜ ᱫᱩᱴᱷᱤᱣᱮ ᱠᱚᱱᱚᱜ?",
+    "validator": "demo_validator",
+    "notes": "Kaun/Kon spelling variant"
   }
 ]

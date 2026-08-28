@@ -1,15 +1,28 @@
 """VaniPath - Integration Tests
 
 Tests for: Auth, Translation, Speech, Classroom, Copilot,
-Worksheets, Flashcards, Assessment, Validation, Offline.
+Worksheets, Flashcards, Assessment, Validation, Offline, Students.
+
+IMPORTANT: Tests ALWAYS run against an isolated SQLite database,
+never against the production Supabase database.
 """
 import pytest
 from fastapi.testclient import TestClient
 import sys
 import os
 
+# ── Force SQLite for tests — NEVER touch production Supabase ──
+os.environ["DATABASE_URL"] = "sqlite:///./vanipath_test.db"
+
 # Add parent to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
+# Re-import after overriding DATABASE_URL so the engine is SQLite
+import importlib
+import app.config
+importlib.reload(app.config)
+import app.database.database
+importlib.reload(app.database.database)
 
 from app.main import app
 from app.database.database import create_tables, engine, Base
@@ -21,18 +34,32 @@ client = TestClient(app)
 
 @pytest.fixture(scope="module", autouse=True)
 def setup_database():
-    """Create fresh database and seed before tests."""
+    """Create fresh SQLite test database and seed before tests.
+    NEVER drops production tables."""
     Base.metadata.drop_all(bind=engine)
     create_tables()
     seed()
     yield
     Base.metadata.drop_all(bind=engine)
+    # Clean up test DB file
+    test_db = os.path.join(os.path.dirname(os.path.dirname(__file__)), "vanipath_test.db")
+    for suffix in ["", "-shm", "-wal"]:
+        try:
+            os.remove(test_db + suffix)
+        except OSError:
+            pass
 
 
 # ─── Health Check ──────────────────────────────────────
 class TestHealth:
-    def test_root(self):
-        response = client.get("/")
+    def test_root_redirects(self):
+        """Root now redirects to frontend dashboard."""
+        response = client.get("/", follow_redirects=False)
+        assert response.status_code == 307
+        assert "/app/" in response.headers["location"]
+
+    def test_api_root(self):
+        response = client.get("/api")
         assert response.status_code == 200
         data = response.json()
         assert data["name"] == "VaniPath"
@@ -496,6 +523,42 @@ class TestStudents:
         data = response.json()
         assert data["success"] is True
         assert data["data"]["count"] > 0
+
+    def test_student_progress(self):
+        """Regression test: student progress must not crash on weak_topics."""
+        # Get first student
+        students_resp = client.get("/api/students/")
+        students = students_resp.json()["data"]["students"]
+        assert len(students) > 0
+        student_id = students[0]["id"]
+
+        # This previously crashed with: AttributeError: 'str' object has no attribute 'get'
+        response = client.get(f"/api/students/{student_id}/progress")
+        assert response.status_code == 200
+        data = response.json()
+        assert data["success"] is True
+        # Verify weak_topics and strong_topics are lists (not strings)
+        assert isinstance(data["data"]["weak_topics"], list)
+        assert isinstance(data["data"]["strong_topics"], list)
+        # Verify items in weak_topics are dicts (if any)
+        for item in data["data"]["weak_topics"]:
+            assert isinstance(item, dict), f"weak_topics item is {type(item)}, expected dict"
+            assert "topic" in item
+        # Verify recommendations exist
+        assert "recommendations" in data["data"]
+        assert isinstance(data["data"]["recommendations"], list)
+
+    def test_student_recommendations(self):
+        """Regression test: recommendations endpoint must not crash."""
+        students_resp = client.get("/api/students/")
+        students = students_resp.json()["data"]["students"]
+        student_id = students[0]["id"]
+
+        response = client.get(f"/api/students/{student_id}/recommendations")
+        assert response.status_code == 200
+        data = response.json()
+        assert data["success"] is True
+        assert "recommendations" in data["data"]
 
 
 # ─── Dashboard ─────────────────────────────────────────

@@ -1,9 +1,14 @@
 /**
  * VaniPath Frontend API Client
  * Shared utility for all frontend pages.
- * Talks to the FastAPI backend at VITE_API_BASE_URL or http://localhost:8000/api
+ * Talks to the FastAPI backend.
+ *
+ * When served from FastAPI (same origin), uses relative /api.
+ * When opened as file://, falls back to http://localhost:8000/api.
  */
-const API_BASE = 'http://localhost:8000/api';
+const API_BASE = (window.location.protocol === 'file:')
+  ? 'http://localhost:8000/api'
+  : '/api';
 
 // ─── Auth helpers ──────────────────────────────────────
 function getToken() {

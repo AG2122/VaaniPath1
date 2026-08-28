@@ -45,6 +45,8 @@ class Settings(BaseSettings):
     STT_PROVIDER: str = "local"
     TTS_PROVIDER: str = "local"
     AUDIO_CACHE_DIR: str = "./data/audio"
+    ONLINE_TTS_PROVIDER: str = "edge"  # "edge" or "none"
+    ONLINE_TTS_VOICE: str = "hi-IN-SwaraNeural"
 
     # CORS
     CORS_ORIGINS: str = '["http://localhost:3000","http://localhost:5173","http://localhost:8080"]'

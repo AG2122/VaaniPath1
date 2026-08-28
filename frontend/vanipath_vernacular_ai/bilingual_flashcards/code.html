@@ -125,11 +125,11 @@
 <span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">VaniPath</span>
 </div>
 <nav class="flex items-center gap-6 hidden md:flex">
-<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Dashboard</a>
-<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Translate</a>
-<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Classroom</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../teacher_dashboard/code.html">Dashboard</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../live_translation_tool/code.html">Translate</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../classroom_mode/code.html">Classroom</a>
 <a class="text-primary font-bold font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Learning</a>
-<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">Profile</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../student_progress_dashboard/code.html">Profile</a>
 </nav>
 <button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-primary dark:text-primary-fixed">
 <span class="material-symbols-outlined" data-icon="cloud_done">cloud_done</span>
@@ -203,15 +203,15 @@
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-highest border-t border-outline-variant shadow-lg md:hidden">
 <div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
 <span class="font-label-md text-[10px] leading-tight">Dashboard</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined mb-1" data-icon="translate">translate</span>
 <span class="font-label-md text-[10px] leading-tight">Translate</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../classroom_mode/code.html">
 <span class="material-symbols-outlined mb-1" data-icon="school">school</span>
 <span class="font-label-md text-[10px] leading-tight">Classroom</span>
 </a>
@@ -219,7 +219,7 @@
 <span class="material-symbols-outlined mb-1 icon-fill" data-icon="menu_book">menu_book</span>
 <span class="font-label-md text-[10px] leading-tight">Learning</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../student_progress_dashboard/code.html">
 <span class="material-symbols-outlined mb-1" data-icon="person">person</span>
 <span class="font-label-md text-[10px] leading-tight">Profile</span>
 </a>
@@ -229,15 +229,49 @@
 </nav>
 <script src="../shared/api.js"></script>
 <script>
+// Back button
+(function() {
+  var arrowBacks = document.querySelectorAll('.material-symbols-outlined');
+  arrowBacks.forEach(function(el) {
+    if (el.textContent.trim() === 'arrow_back') {
+      el.parentElement.style.cursor = 'pointer';
+      el.parentElement.addEventListener('click', function() {
+        window.location.href = '../teacher_dashboard/code.html';
+      });
+    }
+  });
+  // Desktop 'Back to Categories' button
+  var backToCatBtn = null;
+  document.querySelectorAll('button').forEach(function(b) {
+    if (b.textContent.includes('Back to Categories')) backToCatBtn = b;
+  });
+  if (backToCatBtn) {
+    backToCatBtn.style.cursor = 'pointer';
+    backToCatBtn.addEventListener('click', function() {
+      window.location.href = '../teacher_dashboard/code.html';
+    });
+  }
+})();
+
 (async function() {
   let cards = [];
   let currentIndex = 0;
+  let flagged = {};
   const hindiEl = document.getElementById('card-hindi');
   const santhaliEl = document.getElementById('card-santhali');
   const progressText = document.getElementById('progress-text');
   const progressBar = document.getElementById('progress-bar');
-  const prevBtn = document.querySelector('button:has(.chevron_left)');
-  const nextBtn = document.querySelector('button:has(.chevron_right)');
+  // Find buttons by their text content since :has(.icon_name) doesn't match icon text
+  var prevBtn = null, nextBtn = null, speakerBtn = null;
+  document.querySelectorAll('button').forEach(function(b) {
+    var txt = b.textContent.trim();
+    if (txt.includes('Previous')) prevBtn = b;
+    else if (txt.includes('Next') && !txt.includes('Previous')) nextBtn = b;
+    else if (txt.includes('volume_up') && !txt.includes('Previous') && !txt.includes('Next')) speakerBtn = b;
+  });
+  const flagBtn = document.querySelector('button[aria-label="Mark as difficult"]');
+  let currentAudio = null;
+  let audioMode = localStorage.getItem('vanipath_audio_mode') || (navigator.onLine ? 'online' : 'offline');
 
   function showCard() {
     if (cards.length === 0) return;
@@ -246,6 +280,37 @@
     santhaliEl.textContent = card.santhali + (card.pronunciation ? ' (' + card.pronunciation + ')' : '');
     progressText.textContent = (currentIndex + 1) + ' / ' + cards.length;
     progressBar.style.width = ((currentIndex + 1) / cards.length * 100) + '%';
+    // Update flag state
+    if (flagBtn) {
+      if (flagged[currentIndex]) {
+        flagBtn.classList.add('text-error', 'bg-error-container');
+        flagBtn.classList.remove('text-outline', 'hover:text-error', 'hover:bg-error-container');
+      } else {
+        flagBtn.classList.remove('text-error', 'bg-error-container');
+        flagBtn.classList.add('text-outline', 'hover:text-error', 'hover:bg-error-container');
+      }
+    }
+  }
+
+  async function playAudio() {
+    if (cards.length === 0) return;
+    const card = cards[currentIndex];
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    try {
+      const formData = new FormData();
+      formData.append('text', card.santhali);
+      formData.append('language', 'sat');
+      formData.append('mode', audioMode);
+      const res = await fetch('/api/speech/tts', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.success && data.data && data.data.audio_url) {
+        currentAudio = new Audio(data.data.audio_url);
+        currentAudio.volume = 1;
+        currentAudio.play().catch(function(err) { console.error('Audio play error:', err); });
+      } else if (data.data && data.data.audio_unavailable) {
+        console.warn('Audio unavailable offline for:', card.santhali);
+      }
+    } catch(e) { console.error('TTS error:', e); }
   }
 
   try {
@@ -258,8 +323,23 @@
     hindiEl.textContent = 'Backend offline';
   }
 
-  if (prevBtn) prevBtn.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; showCard(); } });
-  if (nextBtn) nextBtn.addEventListener('click', () => { if (currentIndex < cards.length - 1) { currentIndex++; showCard(); } });
+  if (prevBtn) prevBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (currentIndex > 0) { currentIndex--; showCard(); }
+  });
+  if (nextBtn) nextBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (currentIndex < cards.length - 1) { currentIndex++; showCard(); }
+  });
+  if (speakerBtn) speakerBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    playAudio();
+  });
+  if (flagBtn) flagBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    flagged[currentIndex] = !flagged[currentIndex];
+    showCard();
+  });
 })();
 </script>
 </body></html>

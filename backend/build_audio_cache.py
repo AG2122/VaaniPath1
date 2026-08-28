@@ -1,0 +1,153 @@
+"""VaniPath - Audio Cache Builder (BUILD TOOL ONLY)
+
+Pre-generates audio files for all Santali classroom phrases and demo sentences.
+This is a one-time build tool that uses edge-tts to create placeholder audio.
+Run: python build_audio_cache.py
+
+IMPORTANT: This script is a BUILD TOOL, not a runtime component.
+It requires internet (for edge-tts) and should only be run during setup/build.
+The generated audio files are stored in data/audio/sat/ and served offline at runtime.
+
+The audio files are PLACEHOLDERS. Replace them with genuine Santali recordings
+when available. The architecture (phrase hash -> audio file lookup) works
+identically regardless of the audio source.
+"""
+import asyncio
+import hashlib
+import json
+import os
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+# Import transliteration from TTS service
+from app.services.tts_service import olchiki_to_devanagari
+
+# Build phrase list from corrections + classroom phrases (the actual Santhali text)
+import json as _json
+import os as _os
+
+def _build_phrases():
+    """Build phrase list from corrections.json and classroom_phrases.json."""
+    data_dir = _os.path.join(_os.path.dirname(__file__), 'app', '..', 'data', 'languages', 'santhali')
+    phrases = []
+    seen = set()
+
+    # From corrections (gold-standard translations)
+    corr_path = _os.path.join(data_dir, 'corrections.json')
+    if _os.path.exists(corr_path):
+        with open(corr_path, 'r', encoding='utf-8') as f:
+            for c in _json.load(f):
+                text = c['corrected']
+                if text not in seen:
+                    phrases.append(text)
+                    seen.add(text)
+
+    # From classroom phrases
+    cp_path = _os.path.join(data_dir, 'classroom_phrases.json')
+    if _os.path.exists(cp_path):
+        with open(cp_path, 'r', encoding='utf-8') as f:
+            for p in _json.load(f):
+                text = p['santhali']
+                if text not in seen:
+                    phrases.append(text)
+                    seen.add(text)
+
+    return phrases
+
+PHRASES = _build_phrases()
+
+
+def make_hash(text):
+    """Generate a deterministic hash for a phrase."""
+    return hashlib.md5(text.encode('utf-8')).hexdigest()[:16]
+
+
+def make_audio_path(audio_dir, text, lang="sat"):
+    """Generate the audio file path for a phrase."""
+    h = make_hash(text)
+    return os.path.join(audio_dir, f"{lang}_{h}.mp3")
+
+
+async def generate_audio(olchiki_text, voice, output_path):
+    """Generate audio using edge-tts.
+    
+    Transliterates Ol Chiki to Devanagari for TTS processing.
+    """
+    import edge_tts
+    devanagari_text = olchiki_to_devanagari(olchiki_text)
+    communicate = edge_tts.Communicate(devanagari_text, voice)
+    await communicate.save(output_path)
+
+
+def main():
+    audio_dir = os.path.join(os.path.dirname(__file__), "data", "audio")
+    os.makedirs(audio_dir, exist_ok=True)
+
+    # Use a voice for pre-generation (build tool only)
+    voice = "hi-IN-SwaraNeural"
+
+    # Load existing mappings or create new
+    mapping_path = os.path.join(audio_dir, "phrase_map.json")
+    if os.path.exists(mapping_path):
+        with open(mapping_path, "r", encoding="utf-8") as f:
+            phrase_map = json.load(f)
+    else:
+        phrase_map = {}
+
+    print(f"Pre-generating audio for {len(PHRASES)} phrases...")
+    print(f"Voice (build tool): {voice}")
+    print(f"Output directory: {audio_dir}")
+    print()
+
+    loop = asyncio.new_event_loop()
+    generated = 0
+    skipped = 0
+
+    for i, text in enumerate(PHRASES, 1):
+        h = make_hash(text)
+        audio_path = make_audio_path(audio_dir, text)
+        audio_url = f"/audio/{os.path.basename(audio_path)}"
+
+        # Skip if already generated
+        if os.path.exists(audio_path) and os.path.getsize(audio_path) > 100:
+            phrase_map[h] = {
+                "text": text,
+                "audio_url": audio_url,
+                "audio_path": audio_path,
+            }
+            skipped += 1
+            continue
+
+        try:
+            loop.run_until_complete(generate_audio(text, voice, audio_path))
+            size = os.path.getsize(audio_path)
+            phrase_map[h] = {
+                "text": text,
+                "audio_url": audio_url,
+                "audio_path": audio_path,
+            }
+            generated += 1
+            print(f"  [{i}/{len(PHRASES)}] Generated: {h} ({size} bytes) - {text[:30]}...")
+        except Exception as e:
+            print(f"  [{i}/{len(PHRASES)}] FAILED: {text[:30]}... - {e}")
+
+    loop.close()
+
+    # Save mapping
+    with open(mapping_path, "w", encoding="utf-8") as f:
+        json.dump(phrase_map, f, ensure_ascii=False, indent=2)
+
+    print()
+    print(f"Done! Generated: {generated}, Skipped: {skipped}")
+    print(f"Mapping saved to: {mapping_path}")
+    print(f"Total phrases in cache: {len(phrase_map)}")
+    print()
+    print("NOTE: These are placeholder audio files generated by edge-tts (Hindi voice).")
+    print("Replace them with genuine Santali speaker recordings when available.")
+    print("The phrase hash -> audio file architecture works identically.")
+
+
+if __name__ == "__main__":
+    main()

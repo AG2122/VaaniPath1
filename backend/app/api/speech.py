@@ -121,10 +121,19 @@ async def speech_to_text(
 
 @router.post("/tts", tags=["Speech"],
              summary="Text to speech",
-             description="Convert text to audio using text-to-speech.")
+             description="Convert text to audio. Pass mode='online' for online TTS or mode='offline' for cached audio.")
 def text_to_speech(
     text: str = Form(...),
     language: str = Form(default="sat"),
+    mode: str = Form(default="offline"),
 ):
-    result = tts_service.synthesize(text, language)
+    result = tts_service.synthesize(text, language, mode=mode)
     return {"success": True, "data": result}
+
+
+@router.get("/tts/health", tags=["Speech"],
+            summary="TTS health check",
+            description="Check if the TTS service is configured and working.")
+def tts_health():
+    health = tts_service.health_check()
+    return {"success": True, "data": health}

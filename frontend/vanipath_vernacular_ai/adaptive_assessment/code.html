@@ -222,19 +222,19 @@
 </div>
 <div class="hidden md:flex flex-row items-center space-x-6">
 <!-- Desktop Nav Items -->
-<a class="flex items-center gap-1 text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">
+<a class="flex items-center gap-1 text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span class="font-label-md text-label-md">Dashboard</span>
 </a>
-<a class="flex items-center gap-1 text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">
+<a class="flex items-center gap-1 text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined" data-icon="translate">translate</span>
 <span class="font-label-md text-label-md">Translate</span>
 </a>
-<a class="flex items-center gap-1 text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">
+<a class="flex items-center gap-1 text-on-surface-variant hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../classroom_mode/code.html">
 <span class="material-symbols-outlined" data-icon="school">school</span>
 <span class="font-label-md text-label-md">Classroom</span>
 </a>
-<a class="flex items-center gap-1 text-primary font-bold hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="#">
+<a class="flex items-center gap-1 text-primary font-bold hover:bg-surface-container-low transition-colors px-3 py-2 rounded-lg" href="../bilingual_flashcards/code.html">
 <span class="material-symbols-outlined" data-icon="menu_book" data-weight="fill">menu_book</span>
 <span class="font-label-md text-label-md">Learning</span>
 </a>
@@ -245,6 +245,13 @@
 </header>
 <!-- Main Content -->
 <main class="flex-grow flex flex-col items-center justify-start w-full max-w-[1280px] mx-auto px-margin-mobile md:px-margin-desktop pt-lg pb-xl">
+<!-- Back Button -->
+<div class="w-full max-w-2xl mb-4">
+<button onclick="window.location.href='../teacher_dashboard/code.html'" class="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors cursor-pointer" type="button">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</button>
+</div>
 <!-- Header Section -->
 <div class="w-full mb-lg text-center mt-8">
 <h1 id="assessment-title" class="font-headline-lg-mobile text-headline-lg-mobile md:font-headline-lg md:text-headline-lg text-on-surface mb-2">Loading Assessment...</h1>
@@ -270,9 +277,11 @@
 <div id="options-grid" class="grid grid-cols-1 md:grid-cols-3 gap-4">
 <p class="col-span-full text-center text-on-surface-variant py-4">Loading...</p>
 </div>
+<!-- Feedback message -->
+<div id="feedback-msg" class="hidden mt-4 text-center font-label-md text-label-md rounded-xl px-4 py-3"></div>
 </div>
 <div class="mt-6 flex justify-end hidden" id="submit-section">
-<button class="h-12 px-6 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm flex items-center gap-2" id="submit-btn">
+<button type="button" class="h-12 px-6 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm flex items-center gap-2" id="submit-btn">
                     Submit <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
 </button>
 </div>
@@ -290,7 +299,10 @@
 <span id="result-total" class="font-headline-md text-headline-md mt-2">/--</span>
 </div>
 <h3 id="result-message" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface mb-2 z-10">--</h3>
-<p id="result-detail" class="font-body-md text-body-md text-on-surface-variant z-10">--</p>
+<p id="result-detail" class="font-body-md text-body-md text-on-surface-variant z-10 mb-4">--</p>
+<button onclick="window.location.href='../teacher_dashboard/code.html'" type="button" class="h-12 px-6 bg-primary text-on-primary rounded-full font-label-md text-label-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined">arrow_back</span> Back to Dashboard
+</button>
 </div>
 <!-- Analysis Cards -->
 <div class="col-span-1 md:col-span-6 bg-surface-container-lowest border border-outline-variant rounded-[24px] p-md flex flex-col shadow-sm">
@@ -300,18 +312,10 @@
 </div>
 <h4 class="font-headline-md text-headline-md">Strong Areas</h4>
 </div>
-<ul class="space-y-3 flex-grow">
+<ul id="strong-areas" class="space-y-3 flex-grow">
 <li class="flex items-center justify-between font-body-md text-body-md text-on-surface">
-<span>Counting</span>
-<span class="text-tertiary">100%</span>
-</li>
-<li class="flex items-center justify-between font-body-md text-body-md text-on-surface">
-<span>Addition</span>
-<span class="text-tertiary">100%</span>
-</li>
-<li class="flex items-center justify-between font-body-md text-body-md text-on-surface">
-<span>Shape Recognition</span>
-<span class="text-tertiary">90%</span>
+<span>—</span>
+<span class="text-tertiary">—</span>
 </li>
 </ul>
 </div>
@@ -322,10 +326,10 @@
 </div>
 <h4 class="font-headline-md text-headline-md">Needs Practice</h4>
 </div>
-<ul class="space-y-3 flex-grow">
+<ul id="weak-areas" class="space-y-3 flex-grow">
 <li class="flex items-center justify-between font-body-md text-body-md text-on-surface">
-<span>Subtraction</span>
-<span class="text-on-surface-variant">60%</span>
+<span>—</span>
+<span class="text-on-surface-variant">—</span>
 </li>
 </ul>
 </div>
@@ -342,8 +346,8 @@
                                 To help strengthen subtraction skills, let's practice with some visual flashcards. This will bridge the gap between counting and taking away.
                             </p>
 </div>
-<button class="ai-gradient-btn h-12 px-6 rounded-full text-white font-label-md text-label-md flex items-center gap-2 whitespace-nowrap shrink-0 w-full md:w-auto justify-center">
-                            Start Activity <span class="material-symbols-outlined text-[20px]" data-icon="play_arrow">play_arrow</span>
+<button onclick="window.location.href='../bilingual_flashcards/code.html'" type="button" class="ai-gradient-btn h-12 px-6 rounded-full text-white font-label-md text-label-md flex items-center gap-2 whitespace-nowrap shrink-0 w-full md:w-auto justify-center">
+                            Start Activity <span class="material-symbols-outlined text-[20px]">play_arrow</span>
 </button>
 </div>
 </div>
@@ -352,23 +356,23 @@
 </main>
 <!-- BottomNavBar (Mobile Only) -->
 <nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container dark:bg-surface-container-highest border-t border-outline-variant shadow-lg flex justify-around items-center px-4 py-2">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
 <span class="font-label-md text-label-md text-[10px]">Dashboard</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined" data-icon="translate">translate</span>
 <span class="font-label-md text-label-md text-[10px]">Translate</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../classroom_mode/code.html">
 <span class="material-symbols-outlined" data-icon="school">school</span>
 <span class="font-label-md text-label-md text-[10px]">Classroom</span>
 </a>
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="#">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 hover:bg-surface-container-high transition-all duration-200 ease-in-out" href="../bilingual_flashcards/code.html">
 <span class="material-symbols-outlined" data-icon="menu_book" data-weight="fill">menu_book</span>
 <span class="font-label-md text-label-md text-[10px]">Learning</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-lg" href="../student_progress_dashboard/code.html">
 <span class="material-symbols-outlined" data-icon="person">person</span>
 <span class="font-label-md text-label-md text-[10px]">Profile</span>
 </a>
@@ -376,45 +380,63 @@
 <script src="../shared/api.js"></script>
 <script>
 (async function() {
-  let assessmentData = null;
-  let questions = [];
-  let currentIndex = 0;
-  let answers = [];
-  let selectedOption = null;
+  var assessmentData = null;
+  var questions = [];
+  var currentIndex = 0;
+  var answers = [];
+  var selectedOption = null;
+  var phase = 'select'; // 'select' or 'feedback'
 
-  const titleEl = document.getElementById('assessment-title');
-  const counterEl = document.getElementById('question-counter');
-  const progressBar = document.getElementById('assess-progress');
-  const questionText = document.getElementById('question-text');
-  const optionsGrid = document.getElementById('options-grid');
-  const submitSection = document.getElementById('submit-section');
-  const submitBtn = document.getElementById('submit-btn');
-  const questionCard = document.getElementById('question-card');
-  const resultView = document.getElementById('result-view');
-  const resultScore = document.getElementById('result-score');
-  const resultTotal = document.getElementById('result-total');
-  const resultMsg = document.getElementById('result-message');
-  const resultDetail = document.getElementById('result-detail');
+  var titleEl = document.getElementById('assessment-title');
+  var counterEl = document.getElementById('question-counter');
+  var progressBar = document.getElementById('assess-progress');
+  var questionText = document.getElementById('question-text');
+  var optionsGrid = document.getElementById('options-grid');
+  var submitSection = document.getElementById('submit-section');
+  var submitBtn = document.getElementById('submit-btn');
+  var feedbackMsg = document.getElementById('feedback-msg');
+  var questionCard = document.getElementById('question-card');
+  var resultView = document.getElementById('result-view');
+  var resultScore = document.getElementById('result-score');
+  var resultTotal = document.getElementById('result-total');
+  var resultMsg = document.getElementById('result-message');
+  var resultDetail = document.getElementById('result-detail');
+  var strongAreas = document.getElementById('strong-areas');
+  var weakAreas = document.getElementById('weak-areas');
+
+  var fallbackQuestions = [
+    { id: 'q1', santhali_text: 'ᱠᱟᱹᱨᱚᱨᱮ ᱡᱚᱨᱚᱜ 5 ᱟᱨ 7 ᱡᱚᱨᱚᱨᱚᱜ?', hindi_text: '5 और 7 जोड़ो?', options: ['10', '11', '12'], correct_answer: '12', topic: 'Addition' },
+    { id: 'q2', santhali_text: 'ᱢᱤᱵᱟᱜ: 1=ᱤᱧ, __=ᱰᱩ, 3=ᱛᱤᱱᱟ', hindi_text: 'मिलाओ: 1=एक, __=दो, 3=तीन', options: ['2', '4', '5'], correct_answer: '2', topic: 'Counting' },
+    { id: 'q3', santhali_text: 'ᱦᱟᱛᱤ ᱡᱚᱨᱚᱜ 3 ᱟᱨ 4 ᱡᱚᱨᱚᱨᱚᱜ?', hindi_text: 'हाथी जोड़ो 3 और 4 जोड़ो?', options: ['6', '7', '8'], correct_answer: '7', topic: 'Addition' },
+    { id: 'q4', santhali_text: 'ᱤᱧ ᱡᱚᱨᱚᱜ ᱠᱤᱛᱟᱜ ᱨᱚᱨᱚᱜ ᱟᱨ 4 ᱢᱟᱱᱚᱨᱚᱜ?', hindi_text: 'एक जोड़ो किताब जोड़ो और 4 मनाओ?', options: ['3', '4', '5'], correct_answer: '4', topic: 'Counting' },
+    { id: 'q5', santhali_text: 'ᱜᱩᱴᱟᱨᱚᱜ ᱟᱨ 12 ᱢᱟᱱᱚᱨᱚᱜ?', hindi_text: 'घटाओ और 12 मनाओ?', options: ['10', '11', '12'], correct_answer: '12', topic: 'Subtraction' }
+  ];
 
   function renderQuestion() {
-    if (currentIndex >= questions.length) return submitAssessment();
-    const q = questions[currentIndex];
+    if (currentIndex >= questions.length) return showResults();
+    var q = questions[currentIndex];
+    phase = 'select';
+    selectedOption = null;
     titleEl.textContent = 'Grade 2 Mathematics Assessment';
     counterEl.textContent = 'Question ' + (currentIndex + 1) + ' of ' + questions.length;
     progressBar.style.width = ((currentIndex) / questions.length * 100) + '%';
     questionText.textContent = q.santhali_text || q.hindi_text;
-    selectedOption = null;
     submitSection.classList.add('hidden');
+    feedbackMsg.classList.add('hidden');
+    feedbackMsg.className = 'hidden mt-4 text-center font-label-md text-label-md rounded-xl px-4 py-3';
 
-    const opts = q.options || [];
+    var opts = q.options || [];
     optionsGrid.innerHTML = '';
-    opts.forEach(opt => {
-      const btn = document.createElement('button');
-      btn.className = 'w-full h-16 border-2 border-outline-variant rounded-xl flex items-center justify-center hover:bg-surface-container-low hover:border-primary transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent option-btn';
+    opts.forEach(function(opt) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'option-btn w-full h-16 border-2 border-outline-variant rounded-xl flex items-center justify-center hover:bg-surface-container-low hover:border-primary transition-all duration-200 group focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent';
       btn.setAttribute('data-value', opt);
       btn.innerHTML = '<span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">' + opt + '</span>';
-      btn.addEventListener('click', function() {
-        optionsGrid.querySelectorAll('.option-btn').forEach(b => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (phase !== 'select') return;
+        optionsGrid.querySelectorAll('.option-btn').forEach(function(b) {
           b.classList.remove('border-primary', 'bg-primary-container/10');
           b.classList.add('border-outline-variant');
           b.querySelector('span').classList.remove('text-primary');
@@ -429,23 +451,81 @@
     });
   }
 
-  async function submitAssessment() {
-    submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Assessing...';
-    try {
-      const res = await apiSubmitAssessment(assessmentData.assessment_id, answers);
-      if (res.success) {
-        const d = res.data;
-        resultScore.textContent = Math.round(d.score);
-        resultTotal.textContent = '/' + d.total_questions;
-        resultMsg.textContent = d.score >= 80 ? 'Great Job!' : d.score >= 50 ? 'Good Effort!' : 'Keep Practicing!';
-        resultDetail.textContent = 'You got ' + d.correct_answers + ' out of ' + d.total_questions + ' correct.';
+  function showFeedback() {
+    phase = 'feedback';
+    var q = questions[currentIndex];
+    var correctAnswer = q.correct_answer || q.correct || q.answer || '';
+    var isCorrect = String(selectedOption) === String(correctAnswer);
+
+    // Highlight correct/wrong on buttons
+    optionsGrid.querySelectorAll('.option-btn').forEach(function(b) {
+      var val = b.getAttribute('data-value');
+      b.style.pointerEvents = 'none';
+      if (val === String(correctAnswer)) {
+        b.classList.remove('border-outline-variant');
+        b.classList.add('border-green-500', 'bg-green-50');
+        b.querySelector('span').classList.add('text-green-700');
+      } else if (val === String(selectedOption) && !isCorrect) {
+        b.classList.remove('border-outline-variant');
+        b.classList.add('border-red-400', 'bg-red-50');
+        b.querySelector('span').classList.add('text-red-600');
       }
-    } catch(e) {
-      resultScore.textContent = '?';
-      resultMsg.textContent = 'Offline Mode';
+    });
+
+    // Show feedback message
+    feedbackMsg.classList.remove('hidden');
+    if (isCorrect) {
+      feedbackMsg.classList.add('bg-green-50', 'text-green-700', 'border', 'border-green-200');
+      feedbackMsg.textContent = '\u2714 Correct!';
+    } else {
+      feedbackMsg.classList.add('bg-red-50', 'text-red-600', 'border', 'border-red-200');
+      feedbackMsg.textContent = '\u2718 Incorrect. The answer is ' + correctAnswer + '.';
     }
+
+    // Change submit button to Next
+    submitBtn.innerHTML = currentIndex < questions.length - 1
+      ? 'Next Question <span class="material-symbols-outlined">arrow_forward</span>'
+      : 'See Results <span class="material-symbols-outlined">emoji_events</span>';
+  }
+
+  function showResults() {
+    var total = questions.length;
+    var correctCount = 0;
+    var categoryStats = {};
+    answers.forEach(function(a) {
+      var q = questions.find(function(q) { return q.id === a.question_id; });
+      if (!q) return;
+      var cat = q.topic || q.category || 'General';
+      if (!categoryStats[cat]) categoryStats[cat] = { correct: 0, total: 0 };
+      categoryStats[cat].total++;
+      if (a.is_correct) { categoryStats[cat].correct++; correctCount++; }
+    });
+    var pct = Math.round((correctCount / total) * 100);
+
+    resultScore.textContent = correctCount;
+    resultTotal.textContent = '/' + total;
+    resultMsg.textContent = pct >= 80 ? 'Great Job!' : pct >= 50 ? 'Good Effort!' : 'Keep Practicing!';
+    resultDetail.textContent = 'You got ' + correctCount + ' out of ' + total + ' correct (' + pct + '%).';
+
+    // Build strong/weak areas
+    var strongHtml = '';
+    var weakHtml = '';
+    Object.keys(categoryStats).forEach(function(cat) {
+      var s = categoryStats[cat];
+      var catPct = Math.round((s.correct / s.total) * 100);
+      if (catPct >= 60) {
+        strongHtml += '<li class="flex items-center justify-between font-body-md text-body-md text-on-surface"><span>' + cat + '</span><span class="text-tertiary">' + catPct + '%</span></li>';
+      } else {
+        weakHtml += '<li class="flex items-center justify-between font-body-md text-body-md text-on-surface"><span>' + cat + '</span><span class="text-on-surface-variant">' + catPct + '%</span></li>';
+      }
+    });
+    if (!strongHtml) strongHtml = '<li class="font-body-md text-on-surface-variant">No strong areas yet.</li>';
+    if (!weakHtml) weakHtml = '<li class="font-body-md text-on-surface-variant">No weak areas — great work!</li>';
+    strongAreas.innerHTML = strongHtml;
+    weakAreas.innerHTML = weakHtml;
+
     questionCard.classList.add('opacity-0', '-translate-y-4');
-    setTimeout(() => {
+    setTimeout(function() {
       questionCard.classList.add('hidden');
       resultView.classList.remove('hidden');
       void resultView.offsetWidth;
@@ -454,24 +534,43 @@
     }, 300);
   }
 
-  submitBtn.addEventListener('click', () => {
-    if (selectedOption !== null && currentIndex < questions.length) {
-      answers.push({ question_id: questions[currentIndex].id, answer: String(selectedOption) });
+  submitBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (phase === 'select') {
+      if (selectedOption === null || currentIndex >= questions.length) return;
+      var q = questions[currentIndex];
+      var correctAnswer = q.correct_answer || q.correct || q.answer || '';
+      answers.push({ question_id: q.id, answer: String(selectedOption), is_correct: String(selectedOption) === String(correctAnswer) });
+      showFeedback();
+    } else {
+      // phase === 'feedback': advance to next
       currentIndex++;
-      renderQuestion();
+      if (currentIndex >= questions.length) {
+        showResults();
+      } else {
+        renderQuestion();
+      }
     }
   });
 
   // Generate assessment on load
   try {
     assessmentData = await apiGenerateAssessment('Mathematics', 'Numbers 1-20', 2, 5);
-    if (assessmentData.success) {
-      questions = assessmentData.data.questions;
-      renderQuestion();
+    if (assessmentData.success && assessmentData.data && assessmentData.data.questions && assessmentData.data.questions.length > 0) {
+      // Filter out fill_blank questions with no options — replace with fallback
+      var apiQs = assessmentData.data.questions.filter(function(q) { return q.options && q.options.length > 0; });
+      while (apiQs.length < 5 && apiQs.length < fallbackQuestions.length) {
+        apiQs.push(fallbackQuestions[apiQs.length]);
+      }
+      questions = apiQs.length > 0 ? apiQs : fallbackQuestions;
+    } else {
+      questions = fallbackQuestions;
     }
   } catch(e) {
-    titleEl.textContent = 'Backend offline';
+    console.warn('API unavailable, using fallback questions:', e);
+    questions = fallbackQuestions;
   }
+  renderQuestion();
 })();
 </script>
 </body></html>

@@ -203,34 +203,34 @@
 <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Quick Actions</h2>
 <div class="grid grid-cols-2 md:grid-cols-4 gap-sm">
 <!-- Action 1 -->
-<button class="group flex flex-col items-center justify-center p-md bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:bg-surface-container-low transition-all duration-300">
+<a href="../live_translation_tool/code.html" class="group flex flex-col items-center justify-center p-md bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:bg-surface-container-low transition-all duration-300">
 <div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center mb-xs group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-primary text-2xl">record_voice_over</span>
 </div>
 <span class="font-label-md text-label-md text-on-surface text-center">Start Live Translation</span>
-</button>
+</a>
 <!-- Action 2 (AI Copilot) -->
-<button class="group flex flex-col items-center justify-center p-md bg-gradient-to-tr from-secondary-container/10 to-surface border border-secondary/20 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
+<a href="../ai_teacher_copilot/code.html" class="group flex flex-col items-center justify-center p-md bg-gradient-to-tr from-secondary-container/10 to-surface border border-secondary/20 rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] transition-all duration-300 relative overflow-hidden">
 <div class="absolute inset-0 bg-secondary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 <div class="w-12 h-12 rounded-full bg-secondary-container/20 flex items-center justify-center mb-xs group-hover:scale-110 transition-transform relative z-10">
 <span class="material-symbols-outlined text-secondary text-2xl" style="font-variation-settings: 'FILL' 1;">drive_file_rename_outline</span>
 </div>
 <span class="font-label-md text-label-md text-on-surface text-center relative z-10">AI Teacher Copilot</span>
-</button>
+</a>
 <!-- Action 3 -->
-<button class="group flex flex-col items-center justify-center p-md bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:bg-surface-container-low transition-all duration-300">
+<a href="../worksheet_generator/code.html" class="group flex flex-col items-center justify-center p-md bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:bg-surface-container-low transition-all duration-300">
 <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-xs group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-on-surface-variant text-2xl">note_add</span>
 </div>
 <span class="font-label-md text-label-md text-on-surface text-center">Create Worksheet</span>
-</button>
+</a>
 <!-- Action 4 -->
-<button class="group flex flex-col items-center justify-center p-md bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:bg-surface-container-low transition-all duration-300">
+<a href="../adaptive_assessment/code.html" class="group flex flex-col items-center justify-center p-md bg-surface border border-outline-variant rounded-xl shadow-[0_2px_4px_rgba(0,0,0,0.05)] hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:bg-surface-container-low transition-all duration-300">
 <div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center mb-xs group-hover:scale-110 transition-transform">
 <span class="material-symbols-outlined text-on-surface-variant text-2xl">assignment_turned_in</span>
 </div>
 <span class="font-label-md text-label-md text-on-surface text-center">Start Assessment</span>
-</button>
+</a>
 </div>
 </section>
 <!-- Main Content Area: Bento Layout -->
@@ -259,10 +259,10 @@
 </div>
 </div>
 <div class="mt-sm relative z-10 flex gap-xs">
-<button class="bg-primary text-on-primary h-[48px] px-6 rounded-lg font-label-md text-label-md hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors flex items-center justify-center gap-2 flex-1 md:flex-none">
+<a href="../ai_teacher_copilot/code.html" class="bg-primary text-on-primary h-[48px] px-6 rounded-lg font-label-md text-label-md hover:bg-primary-fixed hover:text-on-primary-fixed transition-colors flex items-center justify-center gap-2 flex-1 md:flex-none">
 <span>Open Lesson</span>
 <span class="material-symbols-outlined text-sm">arrow_forward</span>
-</button>
+</a>
 </div>
 </div>
 <!-- Small Analytics Stack (Span 1 column on desktop) -->
@@ -274,7 +274,7 @@
 </div>
 <div>
 <p class="font-label-md text-label-md text-on-surface-variant mb-1">Students Active</p>
-<p id="stat-students" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">--</p>
+<p id="stat-students" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold"><span class="inline-block w-8 h-5 bg-surface-dim rounded animate-pulse"></span></p>
 </div>
 </div>
 <!-- Stat 2 -->
@@ -283,7 +283,7 @@
 <span class="material-symbols-outlined text-on-surface-variant">task_alt</span>
 </div>
 <div>
-<p class="font-label-md text-label-md text-on-surface-variant mb-1">Lessons Completed</p><p id="stat-lessons" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold">--</p>
+<p class="font-label-md text-label-md text-on-surface-variant mb-1">Lessons Completed</p><p id="stat-lessons" class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface font-bold"><span class="inline-block w-8 h-5 bg-surface-dim rounded animate-pulse"></span></p>
             </div>
         </div>
         <!-- Stat 3 -->
@@ -293,7 +293,7 @@
 </div>
 <div>
 <p class="font-label-md text-label-md text-on-surface-variant mb-1">Translation Confidence</p>
-<p id="stat-confidence" class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold">--</p>
+<p id="stat-confidence" class="font-headline-lg-mobile text-headline-lg-mobile text-primary font-bold"><span class="inline-block w-12 h-5 bg-surface-dim rounded animate-pulse"></span></p>
 </div>
 </div>
 </div>
@@ -302,46 +302,46 @@
 <!-- BottomNavBar (Mobile Only) -->
 <nav class="md:hidden bg-surface-container dark:bg-surface-container-highest border-t border-outline-variant shadow-lg fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 rounded-t-xl">
 <!-- Dashboard (Active) -->
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 ease-in-out" href="#">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-full px-4 py-1 transition-all duration-200 ease-in-out" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">dashboard</span>
 <span class="font-label-md text-label-md text-[10px]">Dashboard</span>
 </a>
 <!-- Translate -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined mb-1">translate</span>
 <span class="font-label-md text-label-md text-[10px]">Translate</span>
 </a>
 <!-- Classroom -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="../classroom_mode/code.html">
 <span class="material-symbols-outlined mb-1">school</span>
 <span class="font-label-md text-label-md text-[10px]">Classroom</span>
 </a>
 <!-- Learning -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="../bilingual_flashcards/code.html">
 <span class="material-symbols-outlined mb-1">menu_book</span>
 <span class="font-label-md text-label-md text-[10px]">Learning</span>
 </a>
 <!-- Profile -->
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out px-4 py-1 rounded-xl" href="../student_progress_dashboard/code.html">
 <span class="material-symbols-outlined mb-1">person</span>
 <span class="font-label-md text-label-md text-[10px]">Profile</span>
 </a>
 </nav>
 <!-- Desktop Navigation (Hidden on mobile) -->
 <nav class="hidden md:flex fixed top-0 left-0 h-full w-20 bg-surface-container dark:bg-surface-container-highest border-r border-outline-variant shadow-sm flex-col items-center py-6 gap-8 z-30 pt-20">
-<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="#" title="Dashboard">
+<a class="flex flex-col items-center justify-center bg-primary-container text-on-primary-container rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="../teacher_dashboard/code.html" title="Dashboard">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="#" title="Translate">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="../live_translation_tool/code.html" title="Translate">
 <span class="material-symbols-outlined">translate</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="#" title="Classroom">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="../classroom_mode/code.html" title="Classroom">
 <span class="material-symbols-outlined">school</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="#" title="Learning">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out" href="../bilingual_flashcards/code.html" title="Learning">
 <span class="material-symbols-outlined">menu_book</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out mt-auto mb-4" href="#" title="Profile">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high rounded-xl w-14 h-14 transition-all duration-200 ease-in-out mt-auto mb-4" href="../student_progress_dashboard/code.html" title="Profile">
 <span class="material-symbols-outlined">person</span>
 </a>
 </nav>
@@ -355,27 +355,27 @@
     </style>
 <script src="../shared/api.js"></script>
 <script>
-(async function() {
-  const user = getUser();
+// 1. Update greeting immediately from localStorage (no network)
+(function() {
+  var user = getUser();
   if (user && user.name) {
-    const hour = new Date().getHours();
-    const greeting = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
-    document.getElementById('greeting').textContent = greeting + ', ' + user.name.split(' ')[0] + '! 👋';
-  }
-  try {
-    const res = await apiGetTeacherDashboard();
-    if (res.success) {
-      const d = res.data;
-      document.getElementById('stat-students').textContent = d.student_count || 0;
-      document.getElementById('stat-lessons').textContent = d.lessons_completed || 0;
-      document.getElementById('stat-confidence').textContent = (d.translation_confidence || 0) + '%';
-    }
-  } catch(e) {
-    console.log('Backend not available, showing defaults');
-    document.getElementById('stat-students').textContent = '0';
-    document.getElementById('stat-lessons').textContent = '0';
-    document.getElementById('stat-confidence').textContent = '--';
+    var hour = new Date().getHours();
+    var greeting = hour < 12 ? 'Good Morning' : hour < 17 ? 'Good Afternoon' : 'Good Evening';
+    document.getElementById('greeting').textContent = greeting + ', ' + user.name.split(' ')[0] + '! \ud83d\udc4b';
   }
 })();
+// 2. Fire dashboard fetch without blocking page render
+apiGetTeacherDashboard().then(function(res) {
+  if (res && res.success) {
+    var d = res.data;
+    document.getElementById('stat-students').textContent = d.student_count || 0;
+    document.getElementById('stat-lessons').textContent = d.lessons_completed || 0;
+    document.getElementById('stat-confidence').textContent = (d.translation_confidence || 0) + '%';
+  }
+}).catch(function() {
+  document.getElementById('stat-students').textContent = '0';
+  document.getElementById('stat-lessons').textContent = '0';
+  document.getElementById('stat-confidence').textContent = '--';
+});
 </script>
 </body></html>

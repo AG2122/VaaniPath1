@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VaniPath - Worksheet Generator</title>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;family=Lexend:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      "colors": {
+        "primary": "#004ac6", "primary-container": "#2563eb", "on-primary": "#ffffff",
+        "on-primary-container": "#eeefff", "secondary": "#712ae2",
+        "secondary-container": "#8a4cfc", "surface": "#faf8ff",
+        "surface-container-lowest": "#ffffff", "surface-container-low": "#f3f3fe",
+        "surface-container": "#ededf9", "surface-container-high": "#e7e7f3",
+        "on-surface": "#191b23", "on-surface-variant": "#434655",
+        "outline": "#737686", "outline-variant": "#c3c6d7",
+        "tertiary": "#006243", "tertiary-container": "#007d57",
+        "background": "#faf8ff"
+      },
+      "spacing": { "md": "24px", "base": "4px", "xs": "8px", "sm": "16px", "lg": "40px",
+        "margin-mobile": "16px", "margin-desktop": "32px" },
+      "fontFamily": { "body-md": ["Inter"], "headline-lg-mobile": ["Lexend"],
+        "headline-lg": ["Lexend"], "headline-md": ["Lexend"],
+        "label-md": ["Inter"], "body-lg": ["Inter"], "caption": ["Inter"] },
+      "fontSize": {
+        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "500"}],
+        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+      }
+    },
+  },
+}
+</script>
+<style>
+body { background-color: #faf8ff; }
+.worksheet-q { page-break-inside: avoid; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in { animation: fadeIn 0.4s ease-out forwards; }
+</style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md relative overflow-x-hidden">
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-margin-mobile h-12 bg-surface shadow-sm docked full-width top-0 z-40 sticky">
+<div class="flex items-center gap-xs">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest overflow-hidden">
+<img alt="User profile photo" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBC5wY7Vl1Pu2s5nKE0mjNLlhfhKDN3_XDm399NzyTHgoimEV2cxPyfeKHlOeEj29Nc0pHbiboSGE4BeCjjTiNn621c9rScqJgtGWHVt60NOemjXr1d9QMAor1vlwRH2qUmnCHQoPL3jtEvJ9iRzUJ4vqdnMmJ5mnY7XBgnT62ujvXsYnn-JTkeHqozwhHF9DQEnDSNbY5_sxrnU0plRWvZtlcyskXFmzvK_nr_mcfPNEpo0Wykhuy1LQ"/>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-primary">VaniPath</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors scale-95 active:duration-100 text-primary">
+<span class="material-symbols-outlined">cloud_done</span>
+</button>
+</header>
+<!-- Main -->
+<main class="flex-1 px-margin-mobile py-md flex flex-col gap-md overflow-y-auto max-w-[960px] mx-auto w-full">
+<!-- Back + Title -->
+<div class="flex items-center gap-sm mb-sm">
+<button id="back-btn" class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-surface">Worksheet Generator</h1>
+</div>
+<!-- Setup Form -->
+<div id="setup-form" class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant shadow-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-md">Worksheet Setup</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-sm">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Subject</label>
+<select id="subject" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-surface-container-lowest">
+<option value="mathematics">Mathematics</option>
+<option value="language">Language</option>
+<option value="reading">Reading</option>
+<option value="writing">Writing</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Grade</label>
+<select id="grade" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-surface-container-lowest">
+<option value="1">Grade 1</option>
+<option value="2" selected>Grade 2</option>
+</select>
+</div>
+<div class="md:col-span-2">
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Topic</label>
+<input id="topic" type="text" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none" placeholder="e.g. Counting, Addition, Shapes" value="Numbers 1-20"/>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Target Language</label>
+<select id="language" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-surface-container-lowest">
+<option value="sat">Santhali</option>
+</select>
+</div>
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-base">Questions</label>
+<select id="count" class="w-full h-12 rounded-xl border border-outline-variant px-4 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-surface-container-lowest">
+<option value="5">5 Questions</option>
+<option value="10" selected>10 Questions</option>
+</select>
+</div>
+</div>
+<button id="generate-btn" class="w-full h-12 rounded-full bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 mt-md hover:bg-primary-container hover:text-on-primary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined">auto_awesome</span>
+Generate Worksheet
+</button>
+</div>
+<!-- Worksheet Output (hidden initially) -->
+<div id="worksheet-output" class="hidden">
+<div class="flex items-center justify-between mb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface">Generated Worksheet</h2>
+<button id="print-btn" class="h-10 px-4 rounded-lg border border-outline-variant font-label-md text-label-md text-on-surface-variant hover:bg-surface-container-low transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">print</span> Print
+</button>
+</div>
+<div id="worksheet-content" class="bg-surface-container-lowest rounded-2xl p-md border border-outline-variant shadow-sm space-y-md"></div>
+<button id="new-btn" class="w-full h-12 rounded-full border-2 border-primary text-primary font-label-md text-label-md flex items-center justify-center gap-2 mt-md hover:bg-primary/5 transition-colors">
+<span class="material-symbols-outlined">refresh</span> Generate New Worksheet
+</button>
+</div>
+</main>
+<script src="../shared/api.js"></script>
+<script>
+(function() {
+  var backBtn = document.getElementById('back-btn');
+  var generateBtn = document.getElementById('generate-btn');
+  var setupForm = document.getElementById('setup-form');
+  var output = document.getElementById('worksheet-output');
+  var content = document.getElementById('worksheet-content');
+  var printBtn = document.getElementById('print-btn');
+  var newBtn = document.getElementById('new-btn');
+
+  backBtn.addEventListener('click', function() {
+    window.location.href = '../teacher_dashboard/code.html';
+  });
+
+  printBtn.addEventListener('click', function() { window.print(); });
+  newBtn.addEventListener('click', function() {
+    setupForm.classList.remove('hidden');
+    output.classList.add('hidden');
+    content.innerHTML = '';
+  });
+
+  generateBtn.addEventListener('click', function() {
+    var subject = document.getElementById('subject').value;
+    var grade = document.getElementById('grade').value;
+    var topic = document.getElementById('topic').value.trim();
+    var count = parseInt(document.getElementById('count').value);
+
+    if (!topic) { alert('Please enter a topic.'); return; }
+
+    generateBtn.disabled = true;
+    generateBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">autorenew</span> Generating...';
+
+    apiGenerateWorksheet(parseInt(grade), subject, topic, count, 'sat')
+      .then(function(res) {
+        if (res.success && res.data) {
+          renderWorksheet(res.data);
+          setupForm.classList.add('hidden');
+          output.classList.remove('hidden');
+        } else {
+          alert('Failed to generate worksheet. Please try again.');
+        }
+      })
+      .catch(function(e) {
+        console.error(e);
+        alert('Error generating worksheet. Make sure the backend is running.');
+      })
+      .finally(function() {
+        generateBtn.disabled = false;
+        generateBtn.innerHTML = '<span class="material-symbols-outlined">auto_awesome</span> Generate Worksheet';
+      });
+  });
+
+  function renderWorksheet(data) {
+    var questions = data.questions || [];
+    var html = '<div class="border-b border-outline-variant pb-sm mb-sm">' +
+      '<h3 class="font-headline-md text-headline-md text-on-surface">' + (data.title || 'Worksheet') + '</h3>' +
+      '<p class="font-body-md text-body-md text-on-surface-variant">' + (data.description || '') + '</p>' +
+      '</div>';
+
+    questions.forEach(function(q, i) {
+      var optionsHtml = '';
+      if (q.options && q.options.length > 0) {
+        optionsHtml = '<div class="grid grid-cols-2 gap-2 mt-2">';
+        q.options.forEach(function(opt, j) {
+          var letter = String.fromCharCode(65 + j);
+          optionsHtml += '<div class="flex items-center gap-2 p-2 rounded-lg border border-outline-variant/50">' +
+            '<span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-xs font-bold text-on-surface-variant">' + letter + '</span>' +
+            '<span class="font-body-md text-body-md text-on-surface">' + opt + '</span></div>';
+        });
+        optionsHtml += '</div>';
+      }
+
+      html += '<div class="worksheet-q fade-in" style="animation-delay:' + (i * 0.05) + 's">' +
+        '<div class="flex items-start gap-3">' +
+        '<span class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center text-sm font-bold text-primary flex-shrink-0">' + (i + 1) + '</span>' +
+        '<div class="flex-1">' +
+        '<p class="font-body-md text-body-md text-on-surface font-medium">' + (q.hindi || q.question || '') + '</p>' +
+        (q.santhali ? '<p class="font-body-md text-body-md text-on-surface-variant mt-1">' + q.santhali + '</p>' : '') +
+        optionsHtml +
+        '<div class="mt-2 h-16 border-2 border-dashed border-outline-variant/50 rounded-lg flex items-center justify-center text-on-surface-variant text-sm">Answer space</div>' +
+        '</div></div></div>';
+    });
+
+    content.innerHTML = html;
+  }
+})();
+</script>
+</body></html>

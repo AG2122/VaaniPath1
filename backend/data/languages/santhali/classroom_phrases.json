@@ -158,5 +158,116 @@
     "category": "classroom",
     "audio_url": "/audio/classroom/thank_you.wav",
     "confidence": 0.99
+  },
+  {
+    "hindi": "बच्चों, आज हम संख्याओं के बारे में सीखेंगें।",
+    "santhali": "ᱡᱟᱨᱤᱚᱜ, ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱥᱟᱱᱛᱟᱲᱤ ᱨᱚᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।",
+    "english": "Children, today we will learn about numbers.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/learn_numbers.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "बच्चों, आज हम पढ़ना सीखेंगे।",
+    "santhali": "ᱡᱟᱨᱤᱚᱜ, ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱛᱟᱢᱮᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।",
+    "english": "Children, today we will learn to read.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/learn_read.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "बच्चों, आज हम लिखना सीखेंगे।",
+    "santhali": "ᱡᱟᱨᱤᱚᱜ, ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱚᱞᱚᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।",
+    "english": "Children, today we will learn to write.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/learn_write.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "बच्चों, आज हम जोड़ना सीखेंगे।",
+    "santhali": "ᱡᱟᱨᱤᱚᱜ, ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱡᱚᱨᱚᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।",
+    "english": "Children, today we will learn addition.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/learn_add.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "बच्चों, आज हम घटाना सीखेंगे।",
+    "santhali": "ᱡᱟᱨᱤᱚᱜ, ᱮᱢᱟᱡᱮ ᱫᱟᱨᱤ ᱜᱩᱴᱟᱨᱚᱜ ᱵᱟᱝᱨᱚᱢ ᱢᱮ।",
+    "english": "Children, today we will learn subtraction.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/learn_subtract.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "अपनी किताब खोलो और देखो।",
+    "santhali": "ᱠᱚᱨᱚᱜ ᱠᱤᱛᱟᱜ ᱫᱩᱴᱷᱤᱣᱮ ᱢᱮ ᱟᱣ ᱞᱟᱛᱮᱨᱚᱜ ᱢᱮ।",
+    "english": "Open your book and look.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/open_look.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "कौन और जानता है?",
+    "santhali": "ᱠᱩᱱᱚ ᱟᱣ ᱟᱛᱟᱨᱚᱜ ᱠᱚᱱᱚᱜ?",
+    "english": "Who else knows?",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/who_else.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "एक बार फिर से करो।",
+    "santhali": "ᱤᱧ ᱨᱚᱨᱚᱜ ᱨᱚᱨᱚᱜ ᱠᱚᱨᱚᱜ ᱢᱮ।",
+    "english": "Do it once again.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/do_again.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "बहुत अच्छा, शाबाश!",    "santhali": "ᱜᱚᱨᱚ ᱥᱟᱢᱚᱜ, ᱰᱟᱨᱟ᱃!",
+    "english": "Very good, well done!",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/very_good.wav",
+    "confidence": 0.98
+  },
+  {
+    "hindi": "सभी बच्चे बैठ जाओ।",
+    "santhali": "ᱥᱟᱵᱤ ᱡᱟᱨᱤᱚᱜ ᱥᱟᱲᱟᱨᱚᱜ ᱢᱮ।",
+    "english": "All children sit down.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/all_sit.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "सभी खड़े हो जाओ।",
+    "santhali": "ᱥᱟᱵᱤ ᱩᱹᱜᱚᱨᱚᱜ ᱢᱮ।",
+    "english": "All stand up.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/all_stand.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "चलो गिनती करते हैं।",
+    "santhali": "ᱫᱟᱨᱤ ᱜᱤᱱᱚᱨᱮ ᱠᱟᱨᱚᱭ ᱢᱮ।",
+    "english": "Let us count.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/lets_count.wav",
+    "confidence": 0.97
+  },
+  {
+    "hindi": "यह क्या है?",
+    "santhali": "ᱱᱮᱦᱮ ᱠᱟᱦ ᱦᱟᱨᱚ?",
+    "english": "What is this?",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/what_is_this.wav",
+    "confidence": 0.96
+  },
+  {
+    "hindi": "बोर्ड पर देखो।",
+    "santhali": "ᱵᱚᱨᱰ ᱯᱟ ᱞᱟᱛᱮᱨᱚᱜ ᱢᱮ।",
+    "english": "Look at the board.",
+    "category": "classroom",
+    "audio_url": "/audio/classroom/look_board2.wav",
+    "confidence": 0.97
   }
 ]

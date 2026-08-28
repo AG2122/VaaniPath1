@@ -133,7 +133,7 @@
 <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface mb-base">Classroom Mode</h2>
 <p class="font-body-md text-body-md text-on-surface-variant">Quick phrases for immediate communication.</p>
 </div>
-<button class="w-full md:w-auto min-h-[48px] bg-primary text-on-primary font-label-md text-label-md px-md rounded-full shadow-[0_4px_16px_rgba(0,74,198,0.2)] hover:shadow-[0_8px_24px_rgba(0,74,198,0.3)] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-xs">
+<button onclick="window.location.href='../live_translation_tool/code.html'" class="w-full md:w-auto min-h-[48px] bg-primary text-on-primary font-label-md text-label-md px-md rounded-full shadow-[0_4px_16px_rgba(0,74,198,0.2)] hover:shadow-[0_8px_24px_rgba(0,74,198,0.3)] hover:-translate-y-0.5 transition-all duration-200 flex items-center justify-center gap-xs cursor-pointer">
 <span class="material-symbols-outlined icon-filled">record_voice_over</span>
                 Start Live Session
             </button>
@@ -146,11 +146,11 @@
 <!-- BottomNavBar -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container shadow-lg md:hidden">
 <div class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 border-t border-outline-variant bg-surface-container">
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined mb-1">dashboard</span>
 <span class="font-label-md text-label-md">Dashboard</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined mb-1">translate</span>
 <span class="font-label-md text-label-md">Translate</span>
 </a>
@@ -159,11 +159,11 @@
 <span class="material-symbols-outlined icon-filled mb-1">school</span>
 <span class="font-label-md text-label-md">Classroom</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="../bilingual_flashcards/code.html">
 <span class="material-symbols-outlined mb-1">menu_book</span>
 <span class="font-label-md text-label-md">Learning</span>
 </a>
-<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="#">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 ease-in-out p-2 rounded-xl" href="../student_progress_dashboard/code.html">
 <span class="material-symbols-outlined mb-1">person</span>
 <span class="font-label-md text-label-md">Profile</span>
 </a>
@@ -171,11 +171,11 @@
 </nav>
 <!-- Desktop SideNav (Optional/Implicit in layout but hidden on mobile) -->
 <div class="hidden md:flex fixed left-0 top-12 bottom-0 w-[240px] bg-surface-container border-r border-outline-variant flex-col py-md gap-xs z-30">
-<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="../teacher_dashboard/code.html">
 <span class="material-symbols-outlined">dashboard</span>
 <span class="font-label-md text-label-md">Dashboard</span>
 </a>
-<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="../live_translation_tool/code.html">
 <span class="material-symbols-outlined">translate</span>
 <span class="font-label-md text-label-md">Translate</span>
 </a>
@@ -183,11 +183,11 @@
 <span class="material-symbols-outlined icon-filled">school</span>
 <span class="font-label-md text-label-md font-bold">Classroom</span>
 </a>
-<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="#">
+<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors" href="../bilingual_flashcards/code.html">
 <span class="material-symbols-outlined">menu_book</span>
 <span class="font-label-md text-label-md">Learning</span>
 </a>
-<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors mt-auto" href="#">
+<a class="flex items-center gap-sm px-md py-sm mx-sm rounded-xl text-on-surface-variant hover:bg-surface-container-high transition-colors mt-auto" href="../student_progress_dashboard/code.html">
 <span class="material-symbols-outlined">person</span>
 <span class="font-label-md text-label-md">Profile</span>
 </a>
@@ -204,19 +204,41 @@
 <script>
 (async function() {
   const grid = document.getElementById('phrases-grid');
+  let audioMode = localStorage.getItem('vanipath_audio_mode') || (navigator.onLine ? 'online' : 'offline');
+  let currentAudio = null;
+
+  async function playSanthaliAudio(text) {
+    if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+    try {
+      const formData = new FormData();
+      formData.append('text', text);
+      formData.append('language', 'sat');
+      formData.append('mode', audioMode);
+      const res = await fetch('/api/speech/tts', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.success && data.data && data.data.audio_url) {
+        currentAudio = new Audio(data.data.audio_url);
+        currentAudio.volume = 1;
+        currentAudio.play().catch(function(err) { console.error('Audio play error:', err); });
+      } else if (data.data && data.data.audio_unavailable) {
+        console.warn('Audio unavailable offline for:', text);
+      }
+    } catch(e) { console.error('TTS error:', e); }
+  }
+
   try {
     const res = await apiGetClassroomPhrases();
     if (res.success && res.data.phrases.length > 0) {
       grid.innerHTML = '';
       res.data.phrases.forEach(p => {
-        const card = document.createElement('button');
+        const card = document.createElement('div');
         card.className = 'bg-surface rounded-[24px] p-md border border-outline-variant shadow-sm hover:shadow-[0_8px_16px_rgba(0,0,0,0.08)] hover:-translate-y-1 transition-all duration-300 flex flex-col text-left group';
         card.innerHTML = `
           <div class="flex justify-between items-start mb-sm w-full">
             <span class="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">${p.english || ''}</span>
-            <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0">
+            <button class="speak-btn w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center shrink-0 cursor-pointer hover:bg-primary hover:text-on-primary transition-colors" data-santhali="${p.santhali.replace(/"/g, '&quot;')}" aria-label="Play Santhali audio">
               <span class="material-symbols-outlined icon-filled">volume_up</span>
-            </div>
+            </button>
           </div>
           <div class="bg-surface-container-low rounded-lg p-sm w-full border border-surface-dim">
             <p class="font-headline-md text-headline-md font-bold text-on-surface mb-base">${p.hindi}</p>
@@ -227,31 +249,21 @@
             <p class="font-body-md text-body-md text-on-surface-variant">(Santhali)</p>
           </div>
         `;
-        card.addEventListener('click', async () => {
-          try {
-            const tr = await apiTeacherToStudent(p.hindi, null, 2, 'General');
-            if (tr.success) {
-              card.querySelector('.text-tertiary-container').style.color = '#006243';
-              card.querySelector('.text-tertiary-container').textContent = tr.data.translated_text;
-            }
-          } catch(e) { console.error(e); }
-        });
         grid.appendChild(card);
+      });
+
+      grid.addEventListener('click', function(e) {
+        var speakBtn = e.target.closest('.speak-btn');
+        if (speakBtn) {
+          e.stopPropagation();
+          var satText = speakBtn.getAttribute('data-santhali');
+          playSanthaliAudio(satText);
+          return;
+        }
       });
     }
   } catch(e) {
     grid.innerHTML = '<p class="text-error col-span-full text-center py-8">Could not load phrases. Backend offline.</p>';
-  }
-
-  // Start Live Session button
-  const sessionBtn = document.querySelector('button:has(.icon-filled.record_voice_over)');
-  if (sessionBtn) {
-    sessionBtn.addEventListener('click', async () => {
-      try {
-        const res = await apiTeacherToStudent('Classroom session started!', null, 2, 'General');
-        if (res.success) alert('Session started! Session ID: ' + res.data.session_id);
-      } catch(e) { alert('Backend offline. Start with: uvicorn app.main:app --reload'); }
-    });
   }
 })();
 </script>

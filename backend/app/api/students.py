@@ -114,8 +114,36 @@ def get_student_progress(student_id: str, db: Session = Depends(get_db)):
             },
         )
 
-    # Get recommendations
-    weak = progress.weak_topics or []
+    # Get recommendations — normalize weak_topics
+    # PostgreSQL JSONB may return str; SQLite may return str; ensure we have list of dicts
+    def _normalize_topics(val):
+        if not val:
+            return []
+        import json as _json
+        if isinstance(val, str):
+            try:
+                val = _json.loads(val)
+            except Exception:
+                return []
+        if not isinstance(val, list):
+            return []
+        result = []
+        for item in val:
+            if isinstance(item, str):
+                try:
+                    item = _json.loads(item)
+                except Exception:
+                    continue
+            if isinstance(item, dict):
+                result.append(item)
+        return result
+
+    weak = _normalize_topics(progress.weak_topics)
+    strong = _normalize_topics(progress.strong_topics)
+    badges = _normalize_topics(progress.badges) if progress.badges else []
+    if isinstance(badges, list) and badges and isinstance(badges[0], str):
+        badges = badges  # badges are plain strings, not dicts
+
     recommendations = assessment_service.get_recommendations(student_id, weak)
 
     return ProgressResponse(
@@ -128,11 +156,11 @@ def get_student_progress(student_id: str, db: Session = Depends(get_db)):
             "assessments_completed": progress.assessments_completed,
             "average_score": progress.average_score,
             "learning_streak": progress.learning_streak,
-            "strong_topics": progress.strong_topics or [],
-            "weak_topics": progress.weak_topics or [],
+            "strong_topics": strong,
+            "weak_topics": weak,
             "recommended_activity": recommendations[0]["title"] if recommendations else "Start with flashcards",
             "recommendations": recommendations,
-            "badges": progress.badges or [],
+            "badges": badges,
             "last_activity": progress.last_activity_at.isoformat() if progress.last_activity_at else None,
         },
     )
@@ -161,7 +189,30 @@ def get_recommendations(student_id: str, db: Session = Depends(get_db)):
             },
         }
 
-    weak = progress.weak_topics or []
+    # Normalize weak_topics the same way as the progress endpoint
+    def _normalize_topics(val):
+        if not val:
+            return []
+        import json as _json
+        if isinstance(val, str):
+            try:
+                val = _json.loads(val)
+            except Exception:
+                return []
+        if not isinstance(val, list):
+            return []
+        result = []
+        for item in val:
+            if isinstance(item, str):
+                try:
+                    item = _json.loads(item)
+                except Exception:
+                    continue
+            if isinstance(item, dict):
+                result.append(item)
+        return result
+
+    weak = _normalize_topics(progress.weak_topics)
     recommendations = assessment_service.get_recommendations(student_id, weak)
 
     return {

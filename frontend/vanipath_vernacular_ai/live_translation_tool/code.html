@@ -218,10 +218,14 @@
 <span class="material-symbols-outlined">cloud_done</span>
 </button>
 </header>
-<!-- Offline / Status Indicator -->
-<div class="w-full bg-surface-container-low border-b border-outline-variant py-2 px-margin-mobile flex items-center justify-center gap-2">
-<span class="material-symbols-outlined text-[16px] text-tertiary">cloud_off</span>
-<span class="font-caption text-caption text-on-surface-variant">Offline AI • Language Pack Available</span>
+<!-- Online / Offline Mode Toggle -->
+<div id="mode-bar" class="w-full bg-surface-container-low border-b border-outline-variant py-2 px-margin-mobile flex items-center justify-center gap-3">
+<span id="mode-icon" class="material-symbols-outlined text-[16px] text-tertiary">cloud_off</span>
+<span id="mode-label" class="font-caption text-caption text-on-surface-variant">Offline</span>
+<div id="mode-toggle" class="relative w-10 h-5 bg-outline-variant rounded-full cursor-pointer transition-colors" style="background-color: #737686;">
+<div id="mode-thumb" class="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform" style="transform: translateX(0);"></div>
+</div>
+<span id="mode-status" class="font-caption text-caption text-on-surface-variant">AI • Language Pack</span>
 </div>
 <!-- Language Selector Bar -->
 <div class="px-margin-mobile mt-sm">
@@ -240,7 +244,7 @@
 </div>
 </div>
 <!-- Main Chat Canvas -->
-<main class="flex-1 px-margin-mobile py-md flex flex-col gap-lg pb-[120px] overflow-y-auto">
+<main class="flex-1 px-margin-mobile py-md flex flex-col gap-lg overflow-y-auto" style="padding-bottom: 80px;">
 <!-- Teacher Message (Top) -->
 <div class="flex flex-col gap-2 max-w-[90%] self-start">
 <div class="flex items-center gap-2 px-2">
@@ -251,7 +255,7 @@
                     "बच्चों, आज हम संख्याओं के बारे में सीखेंगे।"
                 </p>
 <!-- Play Audio Action inside bubble -->
-<button class="absolute -right-4 -bottom-4 w-10 h-10 bg-surface-container shadow-sm border border-outline-variant rounded-full flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors">
+<button class="absolute -right-4 -bottom-4 w-10 h-10 bg-surface-container shadow-sm border border-outline-variant rounded-full flex items-center justify-center text-primary hover:bg-primary-container hover:text-on-primary-container transition-colors" style="z-index: 55;">
 <span class="material-symbols-outlined text-[20px]">volume_up</span>
 </button>
 </div>
@@ -274,7 +278,7 @@
 <div class="flex items-center gap-2 px-2">
 <span class="font-label-md text-label-md text-on-surface-variant">Santhali (Student)</span>
 </div>
-<div class="bg-primary-container text-on-primary-container p-md rounded-[24px] rounded-br-none shadow-sm relative w-full">
+<div class="bg-primary-container text-on-primary-container p-md rounded-[24px] rounded-br-none shadow-sm relative w-full" style="z-index: 51;">
 <!-- Highlighted Target Language --><p id="translated-text" class="font-headline-md text-headline-md font-bold mb-2">
                     "..."
                 </p>
@@ -329,22 +333,176 @@
 <script src="../shared/api.js"></script>
 <script>
 (function() {
-  const micBtn = document.querySelector('.mic-pulse button');
-  const sourceText = document.getElementById('source-text');
-  const translatedText = document.getElementById('translated-text');
-  const englishText = document.getElementById('english-text');
-  const statusEl = document.getElementById('translate-status');
-  const timeEl = document.getElementById('translate-time');
-  const confidenceEl = document.getElementById('translate-confidence');
+  var micBtn = document.querySelector('.mic-pulse button');
+  var sourceText = document.getElementById('source-text');
+  var translatedText = document.getElementById('translated-text');
+  var englishText = document.getElementById('english-text');
+  var statusEl = document.getElementById('translate-status');
+  var timeEl = document.getElementById('translate-time');
+  var confidenceEl = document.getElementById('translate-confidence');
+
+  // --- Online/Offline Mode Toggle ---
+  var modeIcon = document.getElementById('mode-icon');
+  var modeLabel = document.getElementById('mode-label');
+  var modeToggle = document.getElementById('mode-toggle');
+  var modeThumb = document.getElementById('mode-thumb');
+  var modeStatus = document.getElementById('mode-status');
+  var _audioMode = localStorage.getItem('vanipath_audio_mode');
+  if (!_audioMode) {
+    _audioMode = (navigator.onLine !== false) ? 'online' : 'offline';
+  }
+
+  function _applyMode(m) {
+    _audioMode = m;
+    localStorage.setItem('vanipath_audio_mode', m);
+    if (m === 'online') {
+      modeIcon.textContent = 'cloud_done';
+      modeIcon.className = 'material-symbols-outlined text-[16px] text-primary';
+      modeLabel.textContent = 'Online';
+      modeLabel.className = 'font-caption text-caption text-primary font-medium';
+      modeToggle.style.backgroundColor = '#004ac6';
+      modeThumb.style.transform = 'translateX(20px)';
+      modeStatus.textContent = 'AI • Live TTS';
+    } else {
+      modeIcon.textContent = 'cloud_off';
+      modeIcon.className = 'material-symbols-outlined text-[16px] text-tertiary';
+      modeLabel.textContent = 'Offline';
+      modeLabel.className = 'font-caption text-caption text-on-surface-variant';
+      modeToggle.style.backgroundColor = '#737686';
+      modeThumb.style.transform = 'translateX(0)';
+      modeStatus.textContent = 'AI • Language Pack';
+    }
+  }
+
+  if (modeToggle) {
+    modeToggle.addEventListener('click', function() {
+      _applyMode(_audioMode === 'online' ? 'offline' : 'online');
+    });
+  }
+
+  // Auto-detect on network change
+  window.addEventListener('online', function() {
+    if (!localStorage.getItem('vanipath_audio_mode')) _applyMode('online');
+  });
+  window.addEventListener('offline', function() {
+    if (!localStorage.getItem('vanipath_audio_mode')) _applyMode('offline');
+  });
+
+  _applyMode(_audioMode);
+
+  var _voicesReady = false;
+  function _loadVoices() {
+    if (_voicesReady) return;
+    var v = window.speechSynthesis.getVoices();
+    if (v.length > 0) _voicesReady = true;
+  }
+  if ('speechSynthesis' in window) {
+    _loadVoices();
+    window.speechSynthesis.onvoiceschanged = function() { _voicesReady = true; };
+  }
+  function _pickVoice(lang) {
+    var voices = window.speechSynthesis.getVoices();
+    if (!voices.length) return null;
+    var exact = voices.find(function(v) { return v.lang === lang; });
+    if (exact) return exact;
+    var prefix = lang.split('-')[0];
+    var partial = voices.find(function(v) { return v.lang.startsWith(prefix); });
+    if (partial) return partial;
+    var fallback = voices.find(function(v) { return v.lang.startsWith('en-IN'); });
+    if (fallback) return fallback;
+    return voices[0];
+  }
+  var _speaking = false;
+  var _speakingBtn = null;
+  var _currentAudio = null;
+
+  function speak(text, lang, btn) {
+    // Toggle: if already playing, stop
+    if (_speaking) {
+      if (_currentAudio) { _currentAudio.pause(); _currentAudio = null; }
+      window.speechSynthesis.cancel();
+      _speaking = false;
+      _speakingBtn = null;
+      if (btn) btn.classList.remove('animate-pulse');
+      return;
+    }
+
+    _speaking = true;
+    _speakingBtn = btn || null;
+    if (btn) {
+      btn.classList.remove('animate-pulse');
+      btn.classList.add('animate-pulse');
+    }
+
+    // For Santhali: use backend TTS (online or offline based on mode)
+    if (lang === 'sat') {
+      var formData = new FormData();
+      formData.append('text', text);
+      formData.append('language', 'sat');
+      formData.append('mode', _audioMode || 'offline');
+      fetch(API_BASE + '/speech/tts', { method: 'POST', body: formData })
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+          if (data.success && data.data && data.data.audio_url) {
+            var audio = new Audio(data.data.audio_url);
+            _currentAudio = audio;
+            audio.onended = function() { _speaking = false; _speakingBtn = null; _currentAudio = null; if (btn) btn.classList.remove('animate-pulse'); };
+            audio.onerror = function() { _speaking = false; _speakingBtn = null; _currentAudio = null; if (btn) btn.classList.remove('animate-pulse'); };
+            audio.play().catch(function() { _speaking = false; _speakingBtn = null; _currentAudio = null; if (btn) btn.classList.remove('animate-pulse'); });
+          } else if (data.data && data.data.audio_unavailable) {
+            _speaking = false; _speakingBtn = null; if (btn) btn.classList.remove('animate-pulse');
+            var msg = _audioMode === 'online' ? 'Online audio unavailable — no offline audio for this sentence.' : 'Audio unavailable offline';
+            statusEl.textContent = msg;
+            setTimeout(function() { statusEl.textContent = 'Translated'; }, 4000);
+          } else {
+            _speaking = false; _speakingBtn = null; if (btn) btn.classList.remove('animate-pulse');
+          }
+        })
+        .catch(function() { _speaking = false; _speakingBtn = null; if (btn) btn.classList.remove('animate-pulse'); });
+      return;
+    }
+
+    // For Hindi: use browser speechSynthesis
+    if (!('speechSynthesis' in window)) { _speaking = false; _speakingBtn = null; return; }
+    var u = new SpeechSynthesisUtterance(text);
+    u.lang = lang;
+    u.rate = 0.85;
+    var voice = _pickVoice(lang);
+    if (voice) { u.voice = voice; u.lang = voice.lang; }
+    u.onend = function() { _speaking = false; _speakingBtn = null; if (btn) btn.classList.remove('animate-pulse'); };
+    u.onerror = function() { _speaking = false; _speakingBtn = null; if (btn) btn.classList.remove('animate-pulse'); };
+    window.speechSynthesis.cancel();
+    setTimeout(function() { window.speechSynthesis.speak(u); }, 50);
+    setTimeout(function() { _speaking = false; _speakingBtn = null; if (btn) btn.classList.remove('animate-pulse'); }, 5000);
+  }
+
+  var volBtns = document.querySelectorAll('button');
+  volBtns.forEach(function(btn) {
+    var icon = btn.querySelector('.material-symbols-outlined');
+    if (icon && icon.textContent.trim() === 'volume_up') {
+      btn.style.cursor = 'pointer';
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var isTarget = btn.closest('.bg-primary-container');
+        if (isTarget) {
+          var txt = translatedText.textContent.replace(/^\"|\"$/g, '');
+          speak(txt, 'sat', btn);
+        } else {
+          var txt2 = sourceText.textContent.replace(/^\"|\"$/g, '');
+          speak(txt2, 'hi-IN', btn);
+        }
+      });
+    }
+  });
 
   async function doTranslate(text) {
     statusEl.textContent = 'Translating...';
-    const start = performance.now();
+    var start = performance.now();
     try {
-      const res = await apiTranslate(text, 'hi', 'sat', { grade: 2, subject: 'mathematics' });
-      const elapsed = ((performance.now() - start) / 1000).toFixed(1);
+      var res = await apiTranslate(text, 'hi', 'sat', { grade: 2, subject: 'mathematics' });
+      var elapsed = ((performance.now() - start) / 1000).toFixed(1);
       if (res.success) {
-        translatedText.textContent = '"' + res.data.translated_text + '"';
+        translatedText.textContent = '\"' + res.data.translated_text + '\"';
         englishText.textContent = text;
         statusEl.textContent = 'Translated';
         timeEl.textContent = elapsed + 's';
@@ -356,29 +514,45 @@
     }
   }
 
-  // Mic button: use speech recognition if available, else demo
   if (micBtn) {
-    micBtn.addEventListener('click', () => {
+    micBtn.addEventListener('click', function() {
       if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const recognition = new SpeechRecognition();
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        var recognition = new SR();
         recognition.lang = 'hi-IN';
         recognition.interimResults = false;
-        recognition.onresult = (event) => {
-          const text = event.results[0][0].transcript;
-          sourceText.textContent = '"' + text + '"';
+        recognition.onresult = function(ev) {
+          var text = ev.results[0][0].transcript;
+          sourceText.textContent = '\"' + text + '\"';
           doTranslate(text);
         };
-        recognition.onerror = () => doTranslate('बच्चों, आज हम संख्याओं के बारे में सीखेंगे।');
+        recognition.onerror = function() { doTranslate('\u092c\u091a\u094d\u091a\u094b\u0902, \u0906\u091c \u0939\u092e \u0938\u0902\u0916\u094d\u092f\u093e\u0913\u0902 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0938\u0940\u0916\u0947\u0902\u0917\u0947\u0902\u0964'); };
         recognition.start();
       } else {
-        doTranslate('बच्चों, आज हम संख्याओं के बारे में सीखेंगे।');
+        doTranslate('\u092c\u091a\u094d\u091a\u094b\u0902, \u0906\u091c \u0939\u092e \u0938\u0902\u0916\u094d\u092f\u093e\u0913\u0902 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0938\u0940\u0916\u0947\u0902\u0917\u0947\u0902\u0964');
       }
     });
   }
 
-  // Load initial translation on page load
-  doTranslate('बच्चों, आज हम संख्याओं के बारे में सीखेंगे।');
+  var navBtns = document.querySelectorAll('nav button');
+  var navMap = {
+    'Dashboard': '../teacher_dashboard/code.html',
+    'Classroom': '../classroom_mode/code.html',
+    'Learning': '../bilingual_flashcards/code.html',
+    'Profile': '../student_progress_dashboard/code.html'
+  };
+  navBtns.forEach(function(btn) {
+    var spans = btn.querySelectorAll('span');
+    spans.forEach(function(s) {
+      var t = s.textContent.trim();
+      if (navMap[t]) {
+        btn.style.cursor = 'pointer';
+        btn.addEventListener('click', function() { window.location.href = navMap[t]; });
+      }
+    });
+  });
+
+  doTranslate('\u092c\u091a\u094d\u091a\u094b\u0902, \u0906\u091c \u0939\u092e \u0938\u0902\u0916\u094d\u092f\u093e\u0913\u0902 \u0915\u0947 \u092c\u093e\u0930\u0947 \u092e\u0947\u0902 \u0938\u0940\u0916\u0947\u0902\u0917\u0947\u0902\u0964');
 })();
 </script>
 </body></html>

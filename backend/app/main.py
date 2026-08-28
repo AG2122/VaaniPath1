@@ -49,9 +49,11 @@ app = FastAPI(
 )
 
 # CORS Middleware
+# Allow same-origin (frontend served from FastAPI) plus dev servers
+allow_origins = settings.cors_origins_list + ["http://localhost:8000"]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.cors_origins_list,
+    allow_origins=allow_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -100,13 +102,21 @@ app.include_router(dashboard_router)
 # Health check
 @app.get("/", tags=["Health"])
 def root():
-    """Root endpoint - API health check."""
+    """Root endpoint - redirects to frontend dashboard."""
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url="/app/")
+
+
+@app.get("/api", tags=["Health"])
+def api_root():
+    """API health check."""
     return {
         "name": settings.APP_NAME,
         "version": settings.APP_VERSION,
         "status": "running",
         "docs": "/docs",
         "redoc": "/redoc",
+        "app": "/app/",
         "translation": "Hindi ↔ Santhali",
     }
 
@@ -207,6 +217,19 @@ def storage_status():
             "buckets": list(supabase_storage.BUCKETS.values()),
         },
     }
+
+
+# ── Audio file serving ─────────────────────────────────────────────────
+AUDIO_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "audio")
+AUDIO_DIR = os.path.normpath(AUDIO_DIR)
+os.makedirs(AUDIO_DIR, exist_ok=True)
+app.mount("/audio", StaticFiles(directory=AUDIO_DIR), name="audio")
+
+# ── Frontend static files ────────────────────────────────────────────────
+FRONTEND_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "..", "frontend", "vanipath_vernacular_ai")
+FRONTEND_DIR = os.path.normpath(FRONTEND_DIR)
+if os.path.isdir(FRONTEND_DIR):
+    app.mount("/app", StaticFiles(directory=FRONTEND_DIR, html=True), name="frontend")
 
 
 # Startup event
